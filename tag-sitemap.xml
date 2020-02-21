@@ -3,14 +3,28 @@
 
     <url>
         <loc>https://hanhorang.github.io/tags/Hexo/</loc>
-        <lastmod>2020-02-21T07:25:33.196Z</lastmod>
+        <lastmod>2020-02-21T07:30:35.643Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://hanhorang.github.io/tags/Blog/</loc>
-        <lastmod>2020-02-21T07:25:33.196Z</lastmod>
+        <lastmod>2020-02-21T07:30:35.643Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://hanhorang.github.io/tags/Python/</loc>
+        <lastmod>2020-02-21T07:37:36.125Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://hanhorang.github.io/tags/Functional-Programming/</loc>
+        <lastmod>2020-02-21T07:37:36.125Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

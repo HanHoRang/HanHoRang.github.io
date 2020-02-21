@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          깃허브 블로그 구축기 - Welcome HoRoang Blog!
+          Welcome HoRoang Blog!
         
     </title>
 
-    <link rel="canonical" href="https://hanhorang.github.io/2020/02/21/Github_Blog_구축기/">
+    <link rel="canonical" href="https://hanhorang.github.io/tags/Functional-Programming/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('Demo.png')
-            /*post*/
+            background-image: url('/undefined')
+            /*page*/
         
     }
     
@@ -87,20 +87,10 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                              <a class="tag" href="/tags/#Hexo" title="Hexo">Hexo</a>
-                            
-                              <a class="tag" href="/tags/#Blog" title="Blog">Blog</a>
-                            
-                        </div>
-                        <h1>깃허브 블로그 구축기</h1>
-                        <h2 class="subheading">블로그 구축 과정에서 생기는 에러를 해결해봅시다!</h2>
-                        <span class="meta">
-                            Posted by HoRang on
-                            2020-02-21
-                        </span>
+                    <div class="site-heading">
+                        <h1>HoRang Blog</h1>
+                        <!--<hr class="small">-->
+                        <span class="subheading">틀린 내용 / 추가하면 좋을 내용 / 참고하면 좋을 자료 등에 대한 피드백은 언제나 환영합니다.</span>
                     </div>
                 
 
@@ -203,157 +193,210 @@
 
 
     <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
+    <!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-            <!-- Post Container -->
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <h1><span id="github-blog-구축">Github Blog 구축</span></h1>
-<p>기술 블로그용으로 깃허브을 택하여 구축하는 과정에서 생기는 에러에 대한 해결 방법을 정리하였습니다.</p>
-<p>제가 참조하여 따라한 링크는 <a href="https://www.holaxprogramming.com/2017/04/16/github-page-and-hexo/" target="_blank" rel="noopener">다음</a>과 같으며, 테스트는 Ubuntu16.04 에서 진행하였습니다.</p>
-<p><strong>Hexo 설치시 에러</strong></p>
-<p>ubuntu16.04 에서 Nodejs Version 의존성 문제로 업데이트 필요, NVM 설치</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">export</span> NVM_DIR=<span class="string">"<span class="variable">$HOME</span>/.nvm"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> [ -s <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span> ] &amp;&amp; . <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> nvm install 10.0</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> nvm use 10.0</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo install</span></span><br></pre></td></tr></table></figure>
-<p><strong>Deployer not found: git : hexo deploy</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
-<p><strong>Config 설정</strong></p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># Deployment</span></span><br><span class="line"><span class="meta">## Docs: https:<span class="comment">//hexo.io/docs/deployment.html</span></span></span><br><span class="line"><span class="symbol">deploy:</span></span><br><span class="line"><span class="symbol">  type:</span> git</span><br><span class="line"><span class="symbol">  repo:</span> https:<span class="comment">//github.com/your_github_id/your_github_id.github.io.git</span></span><br><span class="line"><span class="symbol">  branch:</span> master</span><br></pre></td></tr></table></figure>
-<h4><span id="참고">참고</span></h4>
-<p><a href="https://jeyolog.github.io/2018/08/02/hexo-%ED%95%B5%EC%86%8C-%ED%99%98%EA%B2%BD%EC%84%A4%EC%A0%95/" target="_blank" rel="noopener">https://jeyolog.github.io/2018/08/02/hexo-%ED%95%B5%EC%86%8C-%ED%99%98%EA%B2%BD%EC%84%A4%EC%A0%95/</a></p>
-<p><a href="https://www.holaxprogramming.com/2017/04/16/github-page-and-hexo/" target="_blank" rel="noopener">https://www.holaxprogramming.com/2017/04/16/github-page-and-hexo/</a><br>
-<a href="https://simhyejin.github.io/2016/06/24/hexo-themes/" target="_blank" rel="noopener">https://simhyejin.github.io/2016/06/24/hexo-themes/</a><br>
-<a href="https://cheese10yun.github.io/blog-start/" target="_blank" rel="noopener">https://cheese10yun.github.io/blog-start/</a></p>
-
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+            
                 
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <!-- 归档列表 -->
+            
+            
 
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2020/02/21/함수형언어_모나드_in_파이썬_.md/" data-toggle="tooltip" data-placement="top" title="함수형 언어 모나드편 in 파이썬">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2020/02/21/함수형언어_in_파이썬_/" data-toggle="tooltip" data-placement="top" title="함수형 언어 in 파이썬">Next Post &rarr;</a>
-                        </li>
-                    
+             <!-- 归档列表 -->
+
+            
+            <div class="one-tag-list">
+                <span class="fa fa-calendar-times-o listing-seperator" id="2020">
+                    <span class="tag-text">2020</span>
+                </span>
+                <ul>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li >
+                    02-21
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/02/21/함수형언어_모나드_in_파이썬_.md/" style="color: #0085a1">
+                        <span>
+                            함수형 언어 모나드편 in 파이썬
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li >
+                    02-21
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/02/21/함수형언어_in_파이썬_/" style="color: #0085a1">
+                        <span>
+                            함수형 언어 in 파이썬
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li >
+                    02-21
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/02/21/Github_Blog_구축기/" style="color: #0085a1">
+                        <span>
+                            깃허브 블로그 구축기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
                 </ul>
-
-                <!-- duoshuo Share start -->
-                
-                <!-- 多说 Share end-->
-
-                <!-- 多说评论框 start -->
-                
-                <!-- 多说评论框 end -->
-
-                <!-- disqus comment start -->
-                
-                <!-- disqus comment end -->
             </div>
             
-            <!-- Tabe of Content -->
-            <!-- Table of Contents -->
 
-    
-      <aside id="sidebar">
-        <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
-        
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Github Blog 구축</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.0.0.1.</span> <span class="toc-nav-text">참고</span></a></li></ol></li></ol></li></ol></li></ol>
-        
-        </div>
-      </aside>
-    
 
-                
-            <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#Hexo" title="Hexo">Hexo</a>
-                        
-                          <a class="tag" href="/tags/#Blog" title="Blog">Blog</a>
-                        
-                    </div>
-                </section>
-                
-
-                <!-- Friends Blog -->
-                
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-
-                    
-                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
-                    
-                </ul>
-                
-            </div>
         </div>
     </div>
-</article>
+</div>
 
+                <!-- 如果开启评论功能 -->
+                
+            </div>
 
+          <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        <!-- Featured Tags -->
 
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Python" title="Python" rel="2">Python</a>
+            
+        
+            
+            <a href="/tags/#Functional Programming" title="Functional Programming" rel="2">Functional Programming</a>
+            
+        
+    </div>
+</section>
 
+        <hr>
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">ABOUT ME</a></h5>
+    <div class="short-about">
 
+        
+            <img id = "avatar_pic" src="/img/ironman-draw.png" />
+        
 
+        
+            <p>Horang Blog</p>
+        
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'hover',
-          placement: 'left',
-          icon: 'ℬ'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+        <!-- SNS Link -->
+        <ul class="list-inline">
+            
+            
+            
 
+            
+
+            
+
+            
+                <li>
+                    <a target="_blank"  href="https://github.com/HanHoRang">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
+            
+            
+        </ul>
+    </div>
+</section>
+        <hr>
+    
+        
+  <h5>RECENT POSTS</h3>
+  <div class="widget">
+    <ul>
+      
+        <li>
+          <a href="/2020/02/21/함수형언어_모나드_in_파이썬_.md/">함수형 언어 모나드편 in 파이썬</a>
+        </li>
+      
+        <li>
+          <a href="/2020/02/21/Github_Blog_구축기/">깃허브 블로그 구축기</a>
+        </li>
+      
+        <li>
+          <a href="/2020/02/21/함수형언어_in_파이썬_/">함수형 언어 in 파이썬</a>
+        </li>
+      
+    </ul>
+  </div>
+
+        <hr>
+    
+        <!-- Friends Blog -->
+
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+
+    
+        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+    
+</ul>
+
+        <hr>
+    
+</div>
+
+        
+    </div>
+</div>
 
 
     <!-- Footer -->
