@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Singleton Pattern - Welcome HoRoang Blog!
+        
+    </title>
+
+    <link rel="canonical" href="https://hanhorang.github.io/2020/02/21/SingleTon_Pattern/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('Demo.png')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Design Pattern" title="Design Pattern">Design Pattern</a>
+                            
+                        </div>
+                        <h1>Singleton Pattern</h1>
+                        <h2 class="subheading">Singleton Pattern</h2>
+                        <span class="meta">
+                            Posted by HoRang on
+                            2020-02-21
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">HoRang Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2><span id="디자인-패턴2">디자인 패턴(2)</span></h2>
+<blockquote>
+<p>중요한 것은 디자인 패턴에 얽매이는 것이 아니라 그 패턴이 <strong>왜 효율적인 방식인지를 이해</strong>하여야 한다.</p>
+</blockquote>
+<p>디자인 패턴 두 번째 발표자료이며 <strong>싱글턴, 옵저버 패턴</strong>에 대해 발표하겠습니다.</p>
+<p>저는 저번 시간과 같이 패턴에 대해 다음과 같은 관점으로 접근하였습니다.</p>
+<ul>
+<li>
+<p>패턴이 된 원인(어떤 점이 효율적인가), 보완해야할 점(to 잡기술 배우기)</p>
+</li>
+<li>
+<p>패턴이 현대 프로그래밍 언어에서는 어떻게 사용되는가?</p>
+</li>
+</ul>
+<h3><span id="싱글턴-패턴">싱글턴 패턴</span></h3>
+<p><strong>싱글턴 패턴</strong>(Singleton pattern)을 따르는 클래스는, 생성자가 여러 차례 호출되더라도 실제로 생성되는 객체는 하나이고 최초 생성 이후에 호출된 생성자는 최초의 생성자가 생성한 객체를 리턴한다. 이와 같은 디자인 유형을 <strong>싱글턴 패턴</strong>이라고 한다. 주로 공통된 객체를 여러개 생성해서 사용하는 DBCP(DataBase Connection Pool)와 같은 상황에서 많이 사용된다.  [위키미러]</p>
+<h4><span id="왜-사용할까">왜 사용할까 ?</span></h4>
+<p>클래스 내에서 인스턴스가 단 하나뿐임을 보장하므로, 프로그램 전역에서 해당 클래스의 인스턴스를 바로 얻을 수 있고, 불필요한 메모리 낭비를 최소화한다.</p>
+<h4><span id="어떻게-구현할까">어떻게 구현할까 ?</span></h4>
+<p><strong><code>__new__</code> 생성자 와 메타클래스 를 통해 구현한 싱글턴</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span><span class="params">(object)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> hasattr(self, <span class="string">'instance'</span>):</span><br><span class="line">            self.Instance = super(Singleton, self).__new__(self)</span><br><span class="line">            <span class="keyword">return</span> self.self.instance</span><br><span class="line">        </span><br><span class="line">s = singleton()</span><br><span class="line">s2 = singleton()</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Object created"</span>, s)</span><br><span class="line">print(<span class="string">"Object created"</span>, s2)</span><br><span class="line"></span><br><span class="line">output</span><br><span class="line">Object created &lt;__main__.Singleton object at <span class="number">0x0000028014344EF0</span>&gt;</span><br><span class="line">Object created &lt;__main__.Singleton object at <span class="number">0x0000028014344EF0</span>&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>python 의 <code>__new__</code> 생성자를 사용하여 싱글턴 구현</p>
+<ul>
+<li><code>__new__</code> ? <code>__init__</code> 이 반환 값을 가질 수 없는 것을 보완한 생성자</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MetaSingleton</span><span class="params">(type)</span>:</span></span><br><span class="line">    _instances = &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, *args, **kwargs)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self <span class="keyword">not</span> <span class="keyword">in</span> self._instances:</span><br><span class="line">            self._instances[self] = super(MetaSingleton, self).__call__(*args, **kwargs)</span><br><span class="line">            <span class="keyword">return</span> self._instances[self]</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Logger</span><span class="params">(metaclass = MetaSingleton)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p><strong>싱글턴 변형, 객체는 다르지만 상태를 공유함</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton2</span>:</span></span><br><span class="line">    __shard_state = &#123;<span class="string">"1"</span>:<span class="string">"2"</span>&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.x = <span class="number">1</span></span><br><span class="line">        self.__dict__ = self.__shared_state</span><br><span class="line">        <span class="keyword">pass</span> </span><br><span class="line">    </span><br><span class="line">b1 = Singleton2();</span><br><span class="line">b2 = Singleton2();</span><br><span class="line">b1.x = <span class="number">5</span></span><br><span class="line"></span><br><span class="line">output</span><br><span class="line">&lt;__main__.LazySingleton object at <span class="number">0x0000028014357F60</span>&gt;</span><br><span class="line">&lt;__main__.LazySingleton object at <span class="number">0x0000028014357F98</span>&gt;</span><br><span class="line">&#123;<span class="string">'1'</span>: <span class="string">'2'</span>, <span class="string">'x'</span>: <span class="number">5</span>&#125;</span><br><span class="line">&#123;<span class="string">'1'</span>: <span class="string">'2'</span>, <span class="string">'x'</span>: <span class="number">5</span>&#125;</span><br></pre></td></tr></table></figure>
+<h4><span id="싱글턴의-문제점">싱글턴의 문제점</span></h4>
+<p>싱글턴 인스턴스가 많은 일을 하거나 데이터를 공유시킬 경우 다른 클래스의 인스턴스들간의 결합도가 높아져 OOP 원칙, &quot;개방-폐쇠 원칙&quot;을 위해하게 된다. 따라서 수정이 어려워지고 테스트하기 어려워진다.</p>
+<p>또한, <strong>멀티쓰레드 환경에서 동기화처리</strong>를 안하면 인스턴스가 두 개가 생성되는 경우가 발생할 수 있음</p>
+<p>결과적으로 ‘goto는 쓰면 안돼’ , ‘전역 객체는 안좋은거야!’ 라는 말 처럼 꼭 필요한 경우가 아니면 지양해야한다.</p>
+<p><strong>멀티쓰레드에서 안전한 싱클톤 클래스 생성하기</strong></p>
+<p>Java 테스트했으며 3가지의 방법을 소개하겠습니다.</p>
+<ol>
+<li><code>Synchronized</code> 를 통한 Thread safe Lazy initialization(게으른 초기화)</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadSafeLazyInitialization</span></span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ThreadSafeLazyInitialization instance;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">ThreadSafeLazyInitialization</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> ThreadSafeLazyInitialization <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">            instance = <span class="keyword">new</span> ThreadSafeLazyInitialization();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>private 생성자로 외부에서의 생성을 막았으나, synchronized 특성상 큰 성능저하가 발생하므로 권장하지 않는다</li>
+</ul>
+<ol start="2">
+<li>Synchronized 대신 가정문 사용하기,  Thread safe lazy initialization + Double-checked locking</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadSafeLazyInitialization</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> ThreadSafeLazyInitialization instance;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">ThreadSafeLazyInitialization</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ThreadSafeLazyInitialization <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(instance == <span class="keyword">null</span>)&#123; </span><br><span class="line">            <span class="keyword">synchronized</span> (ThreadSafeLazyInitialization<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(instance == <span class="keyword">null</span>)</span><br><span class="line">                    instance = <span class="keyword">new</span> ThreadSafeLazyInitialization();</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>synchronized 를 사용하는 것이 아니라 If 문 두번(확인, 동기화)으로 성능 저하를 피했지만 완벽한 방법(개발자가 직접 문제를 회피해야할 코드를 짜야함)은 아닙니다.</li>
+</ul>
+<ol start="3">
+<li><code>final</code> 을 사용한 Initialization on demand holder idiom</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Something</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Something</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">LazyHolder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Something INSTANCE = <span class="keyword">new</span> Something();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Something <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> LazyHolder.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>개발자가 직접 동기화 문제에 대해 코드를 작성하여 문제를 회피하려 한다면 프로그램 구조가 그 만큼 복잡해지고 비용 문제가 생길 수 있고 특히 유지보수 측면에서 이상적이지 못합니다. 이 방법은 JVM의 클래스 초기화 과정에서 보장되는 원자적 특성을 이용하여 싱글턴의 초기화 문제에 대한 <strong>책임을 JVM에 떠넘긴다.</strong></p>
+<p>holder안에 선언된 instance가 static이기 때문에 클래스 로딩시점에 한번만 호출될 것이며 final을 사용해 다시 값이 할당되지 않도록 만든 방법.</p>
+<p>*** 가장 많이 사용하고 일반적인 Singleton 클래스 사용 방법이다.**</p>
+</li>
+</ul>
+<h4><span id="현-트렌드에서의-싱글턴">현 트렌드에서의 싱글턴?</span></h4>
+<p>여기까지 살펴보았을 때, 배(그냥 코드로 사용하기)보다 배꼽(싱글턴 패턴 사용)이 더 큰 상황이라 느꼈습니다.  그래서 현업에서는 싱글턴을 사용해야할 상황일 때 실제 사용하나? 가 궁금해서 생각해봤습니다.</p>
+<p>위키미러를 참고했을 때 싱글턴의 활용처는 DBCP(DataBase Connection Pool)와 같은 상황입니다. 그러면 현 트랜드에서는 DBCP를 싱글턴을 통해 활용하고 있을까요?</p>
+<p>답변부터 드리면,  구글(go, Kotlin)에서는 싱글턴의 <code>Initialization on demand holder idiom</code> 을 문법으로 구현하는 추세입니다.</p>
+<p><code>go</code> - <a href="http://Once.do" target="_blank" rel="noopener">Once.do</a> 활용</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> once sync.Once</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> DriverPg <span class="keyword">struct</span> &#123;</span><br><span class="line">	conn <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// variavel Global</span></span><br><span class="line"><span class="keyword">var</span> instance *DriverPg</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Connect</span><span class="params">()</span> *<span class="title">DriverPg</span></span> &#123;</span><br><span class="line">	once.Do(<span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		instance = &amp;DriverPg&#123;conn: <span class="string">"DriverConnectPostgres"</span>&#125;</span><br><span class="line">        <span class="comment">//DB 연결 처리 </span></span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> instance</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// chamada</span></span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		time.Sleep(time.Millisecond * <span class="number">600</span>)</span><br><span class="line">		fmt.Println(*Connect())</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 100 goroutine</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(ix <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">			time.Sleep(time.Millisecond * <span class="number">60</span>)</span><br><span class="line">			fmt.Println(ix, <span class="string">" = "</span>, Connect().conn)</span><br><span class="line">		&#125;(i)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Scanln()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>동기라이브러리안 <code>Once</code> keyword 이용하여  Initialization on demand holder idiom 구현</li>
+</ul>
+<p><code>kotlin</code>- Object 활용</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span> Payroll &#123; <span class="comment">//object 클래스 생성으로 싱글턴을 구현</span></span><br><span class="line">    <span class="keyword">val</span> allEmplyees = arrayListOf&lt;Person&gt;()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">calculateSalary</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//사용</span></span><br><span class="line">Payroll.calculateSalary() <span class="comment">//싱글턴처럼 . 으로 접근</span></span><br><span class="line">Payroll.allEmplyees.add(Person(<span class="string">"zerog"</span>, Company(<span class="string">"zerog"</span>, Address(<span class="string">""</span>))))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>객체(Object)는 <strong>클래스 선언과 그 클래스에 속한 단일 인스턴스의 생성을</strong> 동시에 처리해주기 때문에 싱글톤에 사용하기 적합합니다.  double-checked locking 같은 locking 알고리즘에 의존하는 것 없이 thread-safe 하고 lazy 한 초기화를 가능하게 해 주기 때문에 JVM에서 싱글톤을 구현하는 방법으로 선호됩니다. 코틀린에서 간단하게 object를 선언하면, 안전하고 효율적인 싱글톤 구현을 보장받을 수 있습니다.</li>
+</ul>
+<h4><span id="정리">정리</span></h4>
+<p>싱글톤의 원리와 구현방법을 살펴보았습니다. 전역 객체를 생성하여 접근하여 메모리 측면의 효율성을 기대하는 패턴이지만, 쓰레드에서의 싱글톤과 OOP 기법의 안정성을 위해 Initialization on demand holder idiom  기법을사용하여 싱글톤을 구현하는 것이 바람직합니다. 더불어 현 구글 언어(go, kotilin)에서는 해당 기법이 문법으로 소개되어있으며 사용하시는 데 참고하시면 되겠습니다.</p>
+<h3><span id="참고">참고</span></h3>
+<p><a href="https://ko.wikipedia.org/wiki/%EC%8B%B1%EA%B8%80%ED%84%B4_%ED%8C%A8%ED%84%B4" target="_blank" rel="noopener">위키백과_싱글턴 패턴</a></p>
+<p><a href="https://tourspace.tistory.com/109" target="_blank" rel="noopener">https://tourspace.tistory.com/109</a></p>
+<p><a href="https://takhyeongmin.github.io/2019/06/24/HowToKotlinSingleTon/" target="_blank" rel="noopener">https://takhyeongmin.github.io/2019/06/24/HowToKotlinSingleTon/</a></p>
+<p><a href="https://fenderist.tistory.com/109" target="_blank" rel="noopener">https://fenderist.tistory.com/109</a></p>
+<p><a href="https://www.fun-coding.org/PL&amp;OOP2-2.html" target="_blank" rel="noopener">https://www.fun-coding.org/PL&amp;OOP2-2.html</a></p>
+<p><a href="https://wikidocs.net/3693" target="_blank" rel="noopener">기본적인 싱글톤 구현방법 5가지</a></p>
+<p><a href="https://limkydev.tistory.com/67" target="_blank" rel="noopener">싱글톤의 고도화</a></p>
+<p><a href="https://jeong-pro.tistory.com/86" target="_blank" rel="noopener">싱글톤 문제점과 3가지 해결방안</a></p>
+<p><a href="https://medium.com/golang-issue/how-singleton-pattern-works-with-golang-2fdd61cd5a7f" target="_blank" rel="noopener">고랭-싱글톤</a></p>
+<p><a href="https://beomseok95.tistory.com/239" target="_blank" rel="noopener">코틀린-싱글톤</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2020/02/21/Observer_Pattern/" data-toggle="tooltip" data-placement="top" title="Observer Pattern">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2020/02/21/함수형언어_모나드_in_파이썬_.md/" data-toggle="tooltip" data-placement="top" title="함수형 언어 모나드편 in 파이썬">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">디자인 패턴(2)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">싱글턴 패턴</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">왜 사용할까 ?</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">어떻게 구현할까 ?</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.3.</span> <span class="toc-nav-text">싱글턴의 문제점</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.4.</span> <span class="toc-nav-text">현 트렌드에서의 싱글턴?</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.5.</span> <span class="toc-nav-text">정리</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">참고</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Design Pattern" title="Design Pattern">Design Pattern</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/HanHoRang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; HoRang 2020 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://hanhorang.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://hanhorang.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

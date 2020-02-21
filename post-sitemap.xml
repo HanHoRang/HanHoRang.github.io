@@ -7,6 +7,38 @@
     </url>
 
     <url>
+        <loc>https://hanhorang.github.io/2020/02/21/Iterator_Pattern/</loc>
+        <lastmod>2020-02-21T07:46:16.852Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://hanhorang.github.io/2020/02/21/Observer_Pattern/</loc>
+        <lastmod>2020-02-21T07:45:53.696Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://hanhorang.github.io/2020/02/21/SingleTon_Pattern/</loc>
+        <lastmod>2020-02-21T07:45:35.327Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://hanhorang.github.io/2020/02/21/Facade_Pattern/</loc>
+        <lastmod>2020-02-21T07:45:11.151Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://hanhorang.github.io/2020/02/21/%ED%95%A8%EC%88%98%ED%98%95%EC%96%B8%EC%96%B4_%EB%AA%A8%EB%82%98%EB%93%9C_in_%ED%8C%8C%EC%9D%B4%EC%8D%AC_.md/</loc>
         <lastmod>2020-02-21T07:37:36.125Z</lastmod>
         <changefreq>weekly</changefreq>
