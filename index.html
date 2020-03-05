@@ -133,6 +133,111 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-05T08:25:24.000Z">2020-03-05</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    16 minutes lesen (Über 2422 Worte)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/03/05/Strategy_Pattern/">Strategy Pattern</a>
+            
+        </h1>
+        <div class="content">
+            <h2><span id="디자인-패턴">디자인 패턴</span></h2>
+<blockquote>
+<p>중요한 것은 디자인 패턴에 얽매이는 것이 아니라 그 패턴이 <strong>왜 효율적인 방식인지를 이해</strong>하여야 한다.</p>
+</blockquote>
+<p>디자인 패턴 세 번째 발표자료이며 <strong>스트레티지, 팩토리 패턴</strong>에 대해 발표하겠습니다.</p>
+<p>저는 저번 시간과 같이 패턴에 대해 다음과 같은 관점으로 접근하였습니다.</p>
+<ul>
+<li>패턴이 된 원인(어떤 점이 효율적인가), 보완해야할 점(to 잡기술 배우기)</li>
+<li>패턴이 현대 프로그래밍 언어에서는 어떻게 사용되는가?</li>
+</ul>
+<h3><span id="스트레티지-패턴">스트레티지 패턴</span></h3>
+<p>전략 패턴 (정책 패턴이라고도 함)은 런타임시 알고리즘을 선택할 수있는 행동 소프트웨어 디자인 패턴입니다. 코드는 단일 알고리즘을 직접 구현하는 대신 알고리즘 계열에서 사용할 알고리즘에 대한 런타임 명령을 수신합니다.</p>
+<p>전략을 사용하면 알고리즘을 사용하는 클라이언트와 알고리즘이 독립적으로 달라질 수 있습니다. 전략은 감마 (Gamma) 등의 영향력있는 책 디자인 패턴에 포함 된 패턴 중 하나입니다. 유연하고 재사용 가능한 객체 지향 소프트웨어를 디자인하는 방법을 설명하기 위해 디자인 패턴을 사용하는 개념을 대중화했습니다. 런타임까지 사용할 알고리즘에 대한 결정을 연기하면 호출 코드를보다 유연하고 재사용 할 수 있습니다.</p>
+<p>예를 들어, 들어오는 데이터에 대한 유효성 검사를 수행하는 클래스는 전략 유형을 사용하여 데이터 형식, 데이터 소스, 사용자 선택 또는 기타 식별 요소에 따라 유효성 검사 알고리즘을 선택할 수 있습니다. 이러한 요소는 런타임까지 알려지지 않았으며 완전히 다른 유효성 검사를 수행해야 할 수도 있습니다. 유효성 검사 객체와 별도로 캡슐화 된 유효성 검사 알고리즘 (전략)은 코드 복제없이 시스템 (또는 다른 시스템)의 다른 영역에있는 다른 유효성 검사 객체에 의해 사용될 수 있습니다.</p>
+<p>일반적으로 전략 패턴은 일부 코드에 대한 참조를 데이터 구조에 저장하고 검색합니다. 이는 네이티브 함수 포인터, 1 급 함수, 객체 지향 프로그래밍 언어의 클래스 또는 클래스 인스턴스와 같은 메커니즘 또는 리플렉션을 통해 언어 구현의 내부 코드 저장소에 액세스하여 달성 할 수 있습니다.</p>
+<p><strong>UML</strong></p>
+<p><img src="https://blog.storyg.co/images/30330328-c4410f50-980f-11e7-95d4-79b111c4a2ed.png" alt="img"></p>
+<h4><span id="전략패턴의-필요성과-구현">전략패턴의 필요성과 구현</span></h4>
+<p>전략 패턴을 왜 필요하고, 어떻게 구현할 것 인지 간단한 예제로 설명하겠습니다.다음 예제는 캐릭터가 무기를 가지고 공격하는 클래스를 구현한 예제입니다. 언어는 파이썬입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Character</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">()</span>:</span></span><br><span class="line">        self.weapon = new Knife()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">doAttack</span><span class="params">()</span>:</span></span><br><span class="line">        print(<span class="string">"Attack Knife!!"</span>)</span><br><span class="line">        Knife().Attack()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실행상 아무 문제없지만, “캐릭터는 단검에 의존된 형태” 입니다. 만약 캐릭터에 검을 장착시키고 싶다면 어떻게 해야할까요?</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Character</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">()</span>:</span></span><br><span class="line">        self.weapon = new Sword()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">doAttack</span><span class="params">()</span>:</span></span><br><span class="line">        print(<span class="string">"Attack Sword!!"</span>)</span><br><span class="line">        Sword().Attack()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>야메로 코드를 변경하여 캐릭터에 검을 장착하였습니다. 하지만 단검과 검을 변경해야하는 캐릭터가 필요하면? 헬게이트 오픈이 예상됩니다변경 요청이 발생할 때마다 코드를 수정해야 합니다. 유지보수가 어려워지며 이는 캐릭터가 무기에 의존되있어 발생합니다. 이를 스프링 프레임워크에서 사용하는 개념으로 설명하자면  <code>DI:Dependency Injection, 의존성 주입</code> 라 합니다.</li>
+</ul>
+<p>의존성을 깨드리기 위해선 어떻게 해야할까요? 간단합니다. Weapon 을 클래스로 만들어 캡슐화시키면 됩니다.  캡슐화를 위해 <strong>인터페이스</strong>를 사용하였습니다. 인터페이스는 클래스는 확장을 위해 <code>open/closed principle(OCP)</code>와 호환되며, 동작을 사용하는 클래스를 중단하지 않고 동작을 변경할 수 있으며, 중요한 코드 변경없이 사용 된 특정 구현을 변경하여 클래스가 동작간에 전환 할 수 있습니다. 디자인 타임뿐만 아니라 런타임에도 동작을 변경할 수 있습니다.  인터페이스를 통해 구현된 예제는 다음과 같습니다.</p>
+<blockquote>
+<p><code>open/closed principle(OCP), 개방 / 폐쇄 원칙</code> :  클래스는 확장을 위해 개방되어야하지만 수정을 위해 폐쇄되어야한다는 원칙입니다.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> abc </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Weapon</span>:</span></span><br><span class="line"></span><br><span class="line">	__metaclass__ = abc.ABCMeta</span><br><span class="line"></span><br><span class="line"><span class="meta">	@abc.abstractmethod</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">doAttack</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Knife</span><span class="params">(Weapon)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">doAttack</span><span class="params">(self)</span>:</span></span><br><span class="line">		print(<span class="string">"Attack Knife!!"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sword</span><span class="params">(Weapon)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">doAttack</span><span class="params">(self)</span>:</span></span><br><span class="line">		print(<span class="string">"Attack Sword!!"</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Character</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, weapon)</span>:</span></span><br><span class="line">		super(Character, self).__init__()</span><br><span class="line">		self.weapon = weapon</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">setWeapon</span><span class="params">(self,weapon)</span>:</span></span><br><span class="line">		self.weapon = weapon</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">doAttack</span><span class="params">(self)</span>:</span></span><br><span class="line">		self.weapon.doAttack()</span><br><span class="line"></span><br><span class="line">c = Character(Knife())</span><br><span class="line">c.doAttack()</span><br><span class="line">c.setWeapon(Sword())</span><br><span class="line">c.doAttack()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>앞서 무기 변경 요청에 대해 메인 함수에서 결정할 수 있게 되었습니다. 즉 무기를 제어하는 제어권이 캐릭터에 있는 것이 아니라 메인 함수로 역전되었으므로 이를 제어가 역전되었다라고 하며 스프링에서 사용하는 기술 영어로  <code>IOC:Inversion of Control, 제어의 역전</code> 이라 합니다.</li>
+</ul>
+<p><strong>그렇다면 지금은?</strong></p>
+<p>사실 파이썬에서는 객체화를 통해 전략 패턴을 구현할 필요는 없습니다. 함수 자체를 변수화시키면 매우 깔끔하고 간단한 전략 패턴을 구현할 수 있거든요. 다음은 Pycon 2009 의 디자인 패턴으로 소개된 전략 패턴 예제입니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">strategy_add</span><span class="params">(a, b)</span>:</span></span><br><span class="line">	<span class="keyword">return</span> a + b</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">strategy_minus</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> a - b</span><br><span class="line"></span><br><span class="line">solver = strategy_add</span><br><span class="line"><span class="keyword">print</span> solver(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">solver = strategy_minus</span><br><span class="line"><span class="keyword">print</span> solver(<span class="number">2</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>매우 깔끔하도다 !</li>
+</ul>
+<h4><span id="전략-패턴을-넘어서">전략 패턴을 넘어서</span></h4>
+<p>앞서 전략 패턴의 소개로 <strong>런타임시 알고리즘을 선택</strong>할 수있는 행동 소프트웨어 디자인 패턴으로  이를 <code>IOC:Inversion of Control, 제어의 역전</code>이라고 소개드렸습니다.  저는 전략 패턴이외에도 Ioc 를 구현할 수 있는 방법으로 서버리스 아키텍처가 있다 생각하여 생각하여 하나의 예제를 소개하고자 합니다. 전자부품연구원에서 서버리크 아키텍처 연구과제로 개발 중인 Openfx의 아키텍처 입니다.</p>
+<p><img src="https://github.com/keti-openfx/openfx/raw/master/OpenFx_Architecture.png" alt="Architecture of the OpenFx"></p>
+<ul>
+<li>기능적 유사 프레임워크로 AWS의 람다라고 생각하시면 편할 것 같습니다. 사용자가 서버의 제약없이 구현부의 코드만 개발하여 해당 프레임워크에 배포하면 자동으로 서버로 묶여 실행되는 구조입니다.  어떻게 구현되는 것일까요?</li>
+</ul>
+<p>아래 예제는 Openfx의 아키텍처에서 Openfx-fn 에서 Executer 의 서버 구현 코드를 일부 가져왔습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> imp</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadPlugin</span><span class="params">(moduleName, funcName)</span>:</span></span><br><span class="line">    mod = imp.load_source(funcName, moduleName)</span><br><span class="line">    <span class="comment"># load user function from module</span></span><br><span class="line">    <span class="keyword">return</span> getattr(mod, funcName)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">serve</span><span class="params">()</span>:</span></span><br><span class="line">    server = grpc.server(futures.ThreadPoolExecutor(max_workers=<span class="number">10</span>))</span><br><span class="line">    watcherServer = FxWatcherServicer(loadPlugin(moduleName, funcName))</span><br><span class="line">    fxwatcher_pb2_grpc.add_FxWatcherServicer_to_server(</span><br><span class="line">        watcherServer, server)</span><br><span class="line"></span><br><span class="line">    server.add_insecure_port(<span class="string">'[::]:'</span>+fxwatcherPort)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    serve()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>핵심은 imp 라이브러리에서 제공하는 loadPlugin 기능입니다. 외부 라이브러리의 함수를 변수로 받아 Server로 등록하는 기능을 수행하며,  런타임시 임의의 함수를 불러와 서버에 등록하여 서버를 시작합니다. 이외에도 도커의 이미지 기술을 활용하여 런타임시간을 늦춰 사용자 함수를 배포할 때 서버의 이미지와 묶여 서버로 실행되는 구조를 가지고 있습니다.</li>
+</ul>
+<p><strong>전략 패턴의 활용</strong></p>
+<p>다음은 동일한 메소드를 가진 클래스들에 대해 어떻게 사용되고 있는 지, gRPC Server의 구현 코드 예제를 보면서 설명하겠습니다.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A ServerOption sets options such as credentials, codec and keepalive parameters, etc.</span></span><br><span class="line"><span class="keyword">type</span> ServerOption <span class="keyword">interface</span> &#123;</span><br><span class="line">	apply(*serverOptions)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 기본 </span></span><br><span class="line"><span class="keyword">type</span> EmptyServerOption <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(EmptyServerOption)</span> <span class="title">apply</span><span class="params">(*serverOptions)</span></span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 사용자 옵션을 위한 구조체 </span></span><br><span class="line"><span class="keyword">type</span> funcServerOption <span class="keyword">struct</span> &#123;</span><br><span class="line">	f <span class="function"><span class="keyword">func</span><span class="params">(*serverOptions)</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 사용자 옵션 함수 실행</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(fdo *funcServerOption)</span> <span class="title">apply</span><span class="params">(do *serverOptions)</span></span> &#123;</span><br><span class="line">	fdo.f(do)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 사용자 옵션 생성 함수</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">newFuncServerOption</span><span class="params">(f <span class="keyword">func</span>(*serverOptions)</span>) *<span class="title">funcServerOption</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;funcServerOption&#123;</span><br><span class="line">		f: f,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewServer</span><span class="params">(opt ...ServerOption)</span> *<span class="title">Server</span></span> &#123;</span><br><span class="line">	opts := defaultServerOptions</span><br><span class="line">    <span class="keyword">for</span> _, o := <span class="keyword">range</span> opt &#123;</span><br><span class="line">		o.apply(&amp;opts)</span><br><span class="line">	&#125;</span><br><span class="line">	s := &amp;Server&#123;</span><br><span class="line">		lis:    <span class="built_in">make</span>(<span class="keyword">map</span>[net.Listener]<span class="keyword">bool</span>),</span><br><span class="line">		opts:   opts,</span><br><span class="line">		conns:  <span class="built_in">make</span>(<span class="keyword">map</span>[transport.ServerTransport]<span class="keyword">bool</span>),</span><br><span class="line">		m:      <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]*service),</span><br><span class="line">		quit:   grpcsync.NewEvent(),</span><br><span class="line">		done:   grpcsync.NewEvent(),</span><br><span class="line">		czData: <span class="built_in">new</span>(channelzData),</span><br><span class="line">	&#125;</span><br><span class="line">	chainUnaryServerInterceptors(s)</span><br><span class="line">	chainStreamServerInterceptors(s)</span><br><span class="line">	s.cv = sync.NewCond(&amp;s.mu)</span><br><span class="line">	<span class="keyword">if</span> EnableTracing &#123;</span><br><span class="line">		_, file, line, _ := runtime.Caller(<span class="number">1</span>)</span><br><span class="line">		s.events = trace.NewEventLog(<span class="string">"grpc.Server"</span>, fmt.Sprintf(<span class="string">"%s:%d"</span>, file, line))</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> channelz.IsOn() &#123;</span><br><span class="line">		s.channelzID = channelz.RegisterServer(&amp;channelzServer&#123;s&#125;, <span class="string">""</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> s</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>apply 를 하면 뭐가 달라지는 건데? …</li>
+</ul>
+<h4><span id="참고">참고</span></h4>
+<p><a href="https://en.wikipedia.org/wiki/Strategy_pattern#Strategy_and_open/closed_principle">위키백과_전략패턴</a></p>
+<p><a href="https://ricepower.tistory.com/13">제어의 역전과 의존성 주입 간단 정리</a></p>
+<p><a href="http://pyvideo.org/video/146/pycon-2009--the--lack-of--design-patterns-in-pyth">파이콘 2009_ 다자인 패턴 소개</a></p>
+<p><a href="https://github.com/keti-openfx/openfx">전자부품연구원 서버리스 아키텍처, Openfx github</a></p>
+<p><a href="https://github.com/grpc/grpc-go/blob/master/server.go">gRPC github</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-02-21T08:25:24.000Z">2020-02-21</time>
                 
                 
@@ -1056,7 +1161,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            7
+                            8
                         </p>
                     </a>
                 </div>
@@ -1208,6 +1313,25 @@
         
         <article class="media">
             
+            <a href="/2020/03/05/Strategy_Pattern/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Strategy Pattern">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-05T08:25:24.000Z">2020-03-05</time></div>
+                    <a href="/2020/03/05/Strategy_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Strategy Pattern</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/02/21/Facade_Pattern/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Facade Pattern">
@@ -1282,25 +1406,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/02/21/함수형언어_모나드_in_파이썬_.md/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="함수형 언어 모나드편 in 파이썬">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-21T07:28:24.000Z">2020-02-21</time></div>
-                    <a href="/2020/02/21/함수형언어_모나드_in_파이썬_.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">함수형 언어 모나드편 in 파이썬</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1311,6 +1416,17 @@
             Archive
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/02/">
@@ -1346,7 +1462,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Design-Pattern/">
                         <span class="tag">Design Pattern</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -1395,6 +1511,25 @@
         
         <article class="media">
             
+            <a href="/2020/03/05/Strategy_Pattern/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Strategy Pattern">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-05T08:25:24.000Z">2020-03-05</time></div>
+                    <a href="/2020/03/05/Strategy_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Strategy Pattern</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/02/21/Facade_Pattern/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Facade Pattern">
@@ -1469,25 +1604,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/02/21/함수형언어_모나드_in_파이썬_.md/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="함수형 언어 모나드편 in 파이썬">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-21T07:28:24.000Z">2020-02-21</time></div>
-                    <a href="/2020/02/21/함수형언어_모나드_in_파이썬_.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">함수형 언어 모나드편 in 파이썬</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1498,6 +1614,17 @@
             Archive
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/02/">
@@ -1533,7 +1660,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Design-Pattern/">
                         <span class="tag">Design Pattern</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
