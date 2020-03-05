@@ -7,22 +7,18 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>깃허브 블로그 구축기 - HoRang Blog</title>
+<title>Kategorien - HoRang Blog</title>
 
 
-    <meta name="description" content="Github Blog 구축 기술 블로그용으로 깃허브을 택하여 구축하는 과정에서 생기는 에러에 대한 해결 방법을 정리하였습니다. 제가 참조하여 따라한 링크는 다음과 같으며, 테스트는 Ubuntu16.04 에서 진행하였습니다. Hexo 설치시 에러 ubuntu16.04 에서 Nodejs Version 의존성 문제로 업데이트 필요, NVM 설치 123456789">
-<meta name="keywords" content="Hexo,Blog">
-<meta property="og:type" content="article">
-<meta property="og:title" content="깃허브 블로그 구축기">
-<meta property="og:url" content="https://hanhorang.github.io/2020/02/21/Github_Blog_구축기/index.html">
+    <meta name="keywords" content="Hexo,Blog,Python,Functional Programming,Design Pattern">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HoRang Blog">
+<meta property="og:url" content="https://hanhorang.github.io/categories/index.html">
 <meta property="og:site_name" content="HoRang Blog">
-<meta property="og:description" content="Github Blog 구축 기술 블로그용으로 깃허브을 택하여 구축하는 과정에서 생기는 에러에 대한 해결 방법을 정리하였습니다. 제가 참조하여 따라한 링크는 다음과 같으며, 테스트는 Ubuntu16.04 에서 진행하였습니다. Hexo 설치시 에러 ubuntu16.04 에서 Nodejs Version 의존성 문제로 업데이트 필요, NVM 설치 123456789">
 <meta property="og:locale" content="kr">
 <meta property="og:image" content="https://hanhorang.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2020-02-21T07:30:35.643Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="깃허브 블로그 구축기">
-<meta name="twitter:description" content="Github Blog 구축 기술 블로그용으로 깃허브을 택하여 구축하는 과정에서 생기는 에러에 대한 해결 방법을 정리하였습니다. 제가 참조하여 따라한 링크는 다음과 같으며, 테스트는 Ubuntu16.04 에서 진행하였습니다. Hexo 설치시 에러 ubuntu16.04 에서 Nodejs Version 의존성 문제로 업데이트 필요, NVM 설치 123456789">
+<meta name="twitter:title" content="HoRang Blog">
 <meta name="twitter:image" content="https://hanhorang.github.io/images/og_image.png">
 
 
@@ -81,7 +77,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="깃허브 블로그 구축기" height="28">
+                <img src="/images/logo.svg" alt="HoRang Blog" height="28">
             
             </a>
         </div>
@@ -95,7 +91,7 @@
                 <a class="navbar-item"
                 href="/archives">Archives</a>
                 
-                <a class="navbar-item"
+                <a class="navbar-item is-active"
                 href="/categories">Categories</a>
                 
                 <a class="navbar-item"
@@ -131,124 +127,18 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-02-21T07:25:24.000Z">2020-02-21</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 minutes lesen (Über 237 Worte)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                깃허브 블로그 구축기
-            
-        </h1>
-        <div class="content">
-            <h1><span id="github-blog-구축">Github Blog 구축</span></h1>
-<p>기술 블로그용으로 깃허브을 택하여 구축하는 과정에서 생기는 에러에 대한 해결 방법을 정리하였습니다.</p>
-<p>제가 참조하여 따라한 링크는 <a href="https://www.holaxprogramming.com/2017/04/16/github-page-and-hexo/" target="_blank" rel="noopener">다음</a>과 같으며, 테스트는 Ubuntu16.04 에서 진행하였습니다.</p>
-<p><strong>Hexo 설치시 에러</strong></p>
-<p>ubuntu16.04 에서 Nodejs Version 의존성 문제로 업데이트 필요, NVM 설치</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">export</span> NVM_DIR=<span class="string">"<span class="variable">$HOME</span>/.nvm"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> [ -s <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span> ] &amp;&amp; . <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> nvm install 10.0</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> nvm use 10.0</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo install</span></span><br></pre></td></tr></table></figure>
-<p><strong>Deployer not found: git : hexo deploy</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
-<p><strong>Config 설정</strong></p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># Deployment</span></span><br><span class="line"><span class="meta">## Docs: https:<span class="comment">//hexo.io/docs/deployment.html</span></span></span><br><span class="line"><span class="symbol">deploy:</span></span><br><span class="line"><span class="symbol">  type:</span> git</span><br><span class="line"><span class="symbol">  repo:</span> https:<span class="comment">//github.com/your_github_id/your_github_id.github.io.git</span></span><br><span class="line"><span class="symbol">  branch:</span> master</span><br></pre></td></tr></table></figure>
-<h4><span id="참고">참고</span></h4>
-<p><a href="https://jeyolog.github.io/2018/08/02/hexo-%ED%95%B5%EC%86%8C-%ED%99%98%EA%B2%BD%EC%84%A4%EC%A0%95/" target="_blank" rel="noopener">https://jeyolog.github.io/2018/08/02/hexo-%ED%95%B5%EC%86%8C-%ED%99%98%EA%B2%BD%EC%84%A4%EC%A0%95/</a></p>
-<p><a href="https://www.holaxprogramming.com/2017/04/16/github-page-and-hexo/" target="_blank" rel="noopener">https://www.holaxprogramming.com/2017/04/16/github-page-and-hexo/</a><br>
-<a href="https://simhyejin.github.io/2016/06/24/hexo-themes/" target="_blank" rel="noopener">https://simhyejin.github.io/2016/06/24/hexo-themes/</a><br>
-<a href="https://cheese10yun.github.io/blog-start/" target="_blank" rel="noopener">https://cheese10yun.github.io/blog-start/</a></p>
-
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Blog/">Blog</a>, <a class="has-link-grey -link" href="/tags/Hexo/">Hexo</a>
-                </div>
-            </div>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-<div class="card">
+<div class="card widget">
     <div class="card-content">
-        <h3 class="menu-label has-text-centered">Gefällt Ihnen der Artikel? Unterstützen Sie den Autor mit</h3>
-        <div class="buttons is-centered">
+        <div class="menu">
+            <h3 class="menu-label">
+                Kategorien
+            </h3>
+            <ul class="menu-list">
             
-                
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
-</div>
-
-                
-                
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
-</div>
-
-                
-                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
-
-<div class="notification is-danger">
-    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
-</div>
-
-                
-                
-<div class="notification is-danger">
-    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
-</div>
-
-                
+            </ul>
         </div>
     </div>
-</div>
-
-
-
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/02/21/함수형언어_모나드_in_파이썬_.md/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">함수형 언어 모나드편 in 파이썬</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/02/21/함수형언어_in_파이썬_/">
-                <span class="level-item">함수형 언어 in 파이썬</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
-
-
-</div>
+</div></div>
                 
 
 
@@ -812,7 +702,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="깃허브 블로그 구축기" height="28">
+                    <img src="/images/logo.svg" alt="HoRang Blog" height="28">
                 
                 </a>
                 <p class="is-size-7">
