@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>https://hanhorang.github.io/2020/02/21/Github_Blog_%EA%B5%AC%EC%B6%95%EA%B8%B0/</loc>
+        <lastmod>2020-03-17T07:54:11.835Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://hanhorang.github.io/2020/03/05/Strategy_Pattern/</loc>
         <lastmod>2020-03-05T08:08:41.532Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -57,14 +65,6 @@
     <url>
         <loc>https://hanhorang.github.io/2020/02/21/%ED%95%A8%EC%88%98%ED%98%95%EC%96%B8%EC%96%B4_in_%ED%8C%8C%EC%9D%B4%EC%8D%AC_/</loc>
         <lastmod>2020-02-21T07:36:57.224Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://hanhorang.github.io/2020/02/21/Github_Blog_%EA%B5%AC%EC%B6%95%EA%B8%B0/</loc>
-        <lastmod>2020-02-21T07:30:35.643Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
