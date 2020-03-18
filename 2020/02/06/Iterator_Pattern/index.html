@@ -7,23 +7,23 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>깃허브 블로그 구축기 - HoRang Blog</title>
+<title>Iterator Pattern - HoRang Blog</title>
 
 
-    <meta name="description" content="Github Blog 구축 기술 블로그용으로 깃허브을 택하여 구축하는 과정에서 생기는 에러에 대한 해결 방법을 정리하였습니다. 제가 참조하여 따라한 링크는 다음과 같으며, 테스트는 Ubuntu16.04 에서 진행하였습니다. Hexo install 에러 ubuntu16.04 에서 Nodejs Version 의존성 문제로 업데이트 필요, NVM 설치 12345">
-<meta name="keywords" content="Hexo,Blog">
+    <meta name="description" content="디자인 패턴 객체 지향 프로그래밍 설계에서 자주 발생하는 문제들을 피하기 위해 사용되는 패턴 다만, 알고리즘이 아니라 상황에 따라 자주 쓰이는 설계 방법을 정리한 코딩 방법론이며 모든 상황의 해결책은 아니다. 중요한 것은 디자인 패턴에 얽매이는 것이 아니라 그 패턴이 왜 효율적인 방식인지를 이해하여야 한다. 이터레이터(iterator) 패턴 반복이 필요한">
+<meta name="keywords" content="Design Pattern">
 <meta property="og:type" content="article">
-<meta property="og:title" content="깃허브 블로그 구축기">
-<meta property="og:url" content="https://hanhorang.github.io/2020/02/16/Github_Blog_구축기/index.html">
+<meta property="og:title" content="Iterator Pattern">
+<meta property="og:url" content="https://hanhorang.github.io/2020/02/06/Iterator_Pattern/index.html">
 <meta property="og:site_name" content="HoRang Blog">
-<meta property="og:description" content="Github Blog 구축 기술 블로그용으로 깃허브을 택하여 구축하는 과정에서 생기는 에러에 대한 해결 방법을 정리하였습니다. 제가 참조하여 따라한 링크는 다음과 같으며, 테스트는 Ubuntu16.04 에서 진행하였습니다. Hexo install 에러 ubuntu16.04 에서 Nodejs Version 의존성 문제로 업데이트 필요, NVM 설치 12345">
+<meta property="og:description" content="디자인 패턴 객체 지향 프로그래밍 설계에서 자주 발생하는 문제들을 피하기 위해 사용되는 패턴 다만, 알고리즘이 아니라 상황에 따라 자주 쓰이는 설계 방법을 정리한 코딩 방법론이며 모든 상황의 해결책은 아니다. 중요한 것은 디자인 패턴에 얽매이는 것이 아니라 그 패턴이 왜 효율적인 방식인지를 이해하여야 한다. 이터레이터(iterator) 패턴 반복이 필요한">
 <meta property="og:locale" content="kr">
-<meta property="og:image" content="https://hanhorang.github.io/images/hexo.jpg">
-<meta property="og:updated_time" content="2020-03-18T04:52:26.877Z">
+<meta property="og:image" content="https://hanhorang.github.io/images/design.gif">
+<meta property="og:updated_time" content="2020-03-18T04:56:04.604Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="깃허브 블로그 구축기">
-<meta name="twitter:description" content="Github Blog 구축 기술 블로그용으로 깃허브을 택하여 구축하는 과정에서 생기는 에러에 대한 해결 방법을 정리하였습니다. 제가 참조하여 따라한 링크는 다음과 같으며, 테스트는 Ubuntu16.04 에서 진행하였습니다. Hexo install 에러 ubuntu16.04 에서 Nodejs Version 의존성 문제로 업데이트 필요, NVM 설치 12345">
-<meta name="twitter:image" content="https://hanhorang.github.io/images/hexo.jpg">
+<meta name="twitter:title" content="Iterator Pattern">
+<meta name="twitter:description" content="디자인 패턴 객체 지향 프로그래밍 설계에서 자주 발생하는 문제들을 피하기 위해 사용되는 패턴 다만, 알고리즘이 아니라 상황에 따라 자주 쓰이는 설계 방법을 정리한 코딩 방법론이며 모든 상황의 해결책은 아니다. 중요한 것은 디자인 패턴에 얽매이는 것이 아니라 그 패턴이 왜 효율적인 방식인지를 이해하여야 한다. 이터레이터(iterator) 패턴 반복이 필요한">
+<meta name="twitter:image" content="https://hanhorang.github.io/images/design.gif">
 
 
 
@@ -81,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/coring.gif" alt="깃허브 블로그 구축기" height="28">
+                <img src="/images/coring.gif" alt="Iterator Pattern" height="28">
             
             </a>
         </div>
@@ -132,7 +132,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="/images/hexo.jpg" alt="깃허브 블로그 구축기">
+            <img class="thumbnail" src="/images/design.gif" alt="Iterator Pattern">
         </span>
     </div>
     
@@ -140,17 +140,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-02-16T07:25:24.000Z">2020-02-16</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Tools/">Tools</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Tools/Hexo/">Hexo</a>
-                </div>
+                <time class="level-item has-text-grey" datetime="2020-02-06T08:25:24.000Z">2020-02-06</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 minutes read (About 227 words)
+                    9 minutes read (About 1378 words)
                 </span>
                 
                 
@@ -159,26 +155,219 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                깃허브 블로그 구축기
+                Iterator Pattern
             
         </h1>
         <div class="content">
-            <h1><span id="github-blog-구축">Github Blog 구축</span></h1>
-<p>기술 블로그용으로 깃허브을 택하여 구축하는 과정에서 생기는 에러에 대한 해결 방법을 정리하였습니다.</p>
-<p>제가 참조하여 따라한 링크는 <a href="https://www.holaxprogramming.com/2017/04/16/github-page-and-hexo/">다음</a>과 같으며, 테스트는 Ubuntu16.04 에서 진행하였습니다.</p>
-<p><strong>Hexo install 에러</strong></p>
-<p>ubuntu16.04 에서 Nodejs Version 의존성 문제로 업데이트 필요, NVM 설치</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">export</span> NVM_DIR=<span class="string">"<span class="variable">$HOME</span>/.nvm"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> [ -s <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span> ] &amp;&amp; . <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> nvm install 10.0</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> nvm use 10.0</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo install</span></span><br></pre></td></tr></table></figure>
-<p>**Deployer not found: git  :: hexo deploy **</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
-<p><strong>블로그 업데이트하기</strong></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo deploy --<span class="keyword">generate</span></span><br></pre></td></tr></table></figure>
+            <h2><span id="디자인-패턴">디자인 패턴</span></h2>
+<p>객체 지향 프로그래밍 설계에서 자주 발생하는 문제들을 피하기 위해 사용되는 패턴</p>
+<p>다만, 알고리즘이 아니라 상황에 따라 자주 쓰이는 설계 방법을 정리한 코딩 방법론이며 모든 상황의 해결책은 아니다. 중요한 것은 디자인 패턴에 얽매이는 것이 아니라 그 패턴이 <strong>왜 효율적인 방식인지를 이해</strong>하여야 한다.</p>
+<h2><span id="이터레이터iterator-패턴">이터레이터(iterator) 패턴</span></h2>
+<p>반복이 필요한 자료구조를 모두 <strong>동일한 인터페이스를 통해 접근</strong>할 수 있도록 메서드를 이용해 자료구조를 활용할 수 있도록 해준다.</p>
+<p>파이썬의 경우, 이터레이터와 제너레이터를 묶어 문법으로 소개되어 있습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 이터레이터</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, index)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> &lt;next item&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>L = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>i = iter(L)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> i</span><br><span class="line">&lt;iterator object at <span class="number">0x8116870</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>i.next()</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>i.next()</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>i.next()</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>i.next()</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File "&lt;stdin&gt;", line 1, in ?</span><br><span class="line">StopIteration</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]:</span><br><span class="line">    print(x)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>굳이 iter() 함수를 사용하지 않아도 for 문으로 접근이 가능하다. 이것은 looping 하는 동안, python 내부에서 임시로 list를 iterator로 자동으로 변환됨</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># generator</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_ints</span><span class="params">(N)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N):</span><br><span class="line">        <span class="keyword">yield</span> i</span><br><span class="line">        </span><br><span class="line"><span class="comment"># generator expression</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>( i <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">10</span>) <span class="keyword">if</span> i % <span class="number">2</span> )</span><br><span class="line">&lt;generator object &lt;genexpr&gt; at <span class="number">0x7f6105d90960</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">#1 제너레이터 사용 이유, 메모리 </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.getsizeof( [i <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">100</span>) <span class="keyword">if</span> i % <span class="number">2</span>] )    <span class="comment"># list</span></span><br><span class="line"><span class="number">536</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.getsizeof( [i <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">1000</span>) <span class="keyword">if</span> i % <span class="number">2</span>] )</span><br><span class="line"><span class="number">4280</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.getsizeof( (i <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">100</span>) <span class="keyword">if</span> i % <span class="number">2</span>) )    <span class="comment"># generator</span></span><br><span class="line"><span class="number">80</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.getsizeof( (i <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">1000</span>) <span class="keyword">if</span> i % <span class="number">2</span>) )</span><br><span class="line"><span class="number">80</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#2 제너레이터 사용 이유, Lazy evaluation </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fibonacci_func</span><span class="params">(n)</span>:</span></span><br><span class="line">	a,b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">	i = <span class="number">0</span></span><br><span class="line">	<span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">if</span> (i &gt; n):    <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">yield</span> a</span><br><span class="line">        a, b = b, a+b</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">fib = fibonacci_func(<span class="number">10</span>)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> fib:</span><br><span class="line">	<span class="keyword">print</span> x</span><br></pre></td></tr></table></figure>
+<ul>
+<li>#1 Memory 를 효율적으로 사용할 수 있다.</li>
+</ul>
+<blockquote>
+<p>list 는 list 안에 속한 모든 데이터를 메모리에 적재하기 때문에 list의 크기 만큼 차지하는 메모리 사이즈가 늘어나게 된다. 하지만 generator 의 경우 데이터 값을 한꺼번에 메모리에 적재 하는 것이 아니라 next() 메소드를 통해 차례로 값에 접근할 때마다 메모리에 적재하는 방식이다.</p>
+</blockquote>
+<ul>
+<li>#2 Lazy evaluation 지원, 메모리상의 효율성 및 불필요한 연산의 배제가 가능하여 효율적인 퍼포먼스를 기대할 수 있다.</li>
+</ul>
+<p><code>itertools</code>  라이브러리에서 <a href="https://docs.python.org/2/library/itertools.html">다양한 이터레이터의 활용 예</a>(iterator building block)를 확인할 수 있습니다.</p>
+<p><strong>Infinite Iterators:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Iterator</th>
+<th style="text-align:center">Arguments</th>
+<th style="text-align:center">Results</th>
+<th style="text-align:center">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.count"><code>count()</code></a></td>
+<td style="text-align:center">start, [step]</td>
+<td style="text-align:center">start, start+step, start+2*step, …</td>
+<td style="text-align:center"><code>count(10) --&gt; 10 11 12 13 14 ...</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.cycle"><code>cycle()</code></a></td>
+<td style="text-align:center">p</td>
+<td style="text-align:center">p0, p1, … plast, p0, p1, …</td>
+<td style="text-align:center"><code>cycle('ABCD') --&gt; A B C D A B C D ...</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.repeat"><code>repeat()</code></a></td>
+<td style="text-align:center">elem [,n]</td>
+<td style="text-align:center">elem, elem, elem, … endlessly or up to n times</td>
+<td style="text-align:center"><code>repeat(10, 3) --&gt; 10 10 10</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Iterators terminating on the shortest input sequence:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Iterator</th>
+<th style="text-align:center">Arguments</th>
+<th style="text-align:center">Results</th>
+<th style="text-align:center">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.chain"><code>chain()</code></a></td>
+<td style="text-align:center">p, q, …</td>
+<td style="text-align:center">p0, p1, … plast, q0, q1, …</td>
+<td style="text-align:center"><code>chain('ABC', 'DEF') --&gt; A B C D E F</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.compress"><code>compress()</code></a></td>
+<td style="text-align:center">data, selectors</td>
+<td style="text-align:center">(d[0] if s[0]), (d[1] if s[1]), …</td>
+<td style="text-align:center"><code>compress('ABCDEF', [1,0,1,0,1,1]) --&gt; A C E F</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.dropwhile"><code>dropwhile()</code></a></td>
+<td style="text-align:center">pred, seq</td>
+<td style="text-align:center">seq[n], seq[n+1], starting when pred fails</td>
+<td style="text-align:center"><code>dropwhile(lambda x: x&lt;5, [1,4,6,4,1]) --&gt; 6 4 1</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.groupby"><code>groupby()</code></a></td>
+<td style="text-align:center">iterable[, keyfunc]</td>
+<td style="text-align:center">sub-iterators grouped by value of keyfunc(v)</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.ifilter"><code>ifilter()</code></a></td>
+<td style="text-align:center">pred, seq</td>
+<td style="text-align:center">elements of seq where pred(elem) is true</td>
+<td style="text-align:center"><code>ifilter(lambda x: x%2, range(10)) --&gt; 1 3 5 7 9</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.ifilterfalse"><code>ifilterfalse()</code></a></td>
+<td style="text-align:center">pred, seq</td>
+<td style="text-align:center">elements of seq where pred(elem) is false</td>
+<td style="text-align:center"><code>ifilterfalse(lambda x: x%2, range(10)) --&gt; 0 2 4 6 8</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.islice"><code>islice()</code></a></td>
+<td style="text-align:center">seq, [start,] stop [, step]</td>
+<td style="text-align:center">elements from seq[start:stop:step]</td>
+<td style="text-align:center"><code>islice('ABCDEFG', 2, None) --&gt; C D E F G</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.imap"><code>imap()</code></a></td>
+<td style="text-align:center">func, p, q, …</td>
+<td style="text-align:center">func(p0, q0), func(p1, q1), …</td>
+<td style="text-align:center"><code>imap(pow, (2,3,10), (5,2,3)) --&gt; 32 9 1000</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.starmap"><code>starmap()</code></a></td>
+<td style="text-align:center">func, seq</td>
+<td style="text-align:center">func(*seq[0]), func(*seq[1]), …</td>
+<td style="text-align:center"><code>starmap(pow, [(2,5), (3,2), (10,3)]) --&gt; 32 9 1000</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.tee"><code>tee()</code></a></td>
+<td style="text-align:center">it, n</td>
+<td style="text-align:center">it1, it2, … itn splits one iterator into n</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.takewhile"><code>takewhile()</code></a></td>
+<td style="text-align:center">pred, seq</td>
+<td style="text-align:center">seq[0], seq[1], until pred fails</td>
+<td style="text-align:center"><code>takewhile(lambda x: x&lt;5, [1,4,6,4,1]) --&gt; 1 4</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.izip"><code>izip()</code></a></td>
+<td style="text-align:center">p, q, …</td>
+<td style="text-align:center">(p[0], q[0]), (p[1], q[1]), …</td>
+<td style="text-align:center"><code>izip('ABCD', 'xy') --&gt; Ax By</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.izip_longest"><code>izip_longest()</code></a></td>
+<td style="text-align:center">p, q, …</td>
+<td style="text-align:center">(p[0], q[0]), (p[1], q[1]), …</td>
+<td style="text-align:center"><code>izip_longest('ABCD', 'xy', fillvalue='-') --&gt; Ax By C- D-</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Combinatoric generators:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Iterator</th>
+<th style="text-align:center">Arguments</th>
+<th style="text-align:right">Results</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.product"><code>product()</code></a></td>
+<td style="text-align:center">p, q, … [repeat=1]</td>
+<td style="text-align:right">cartesian product, equivalent to a nested for-loop</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.permutations"><code>permutations()</code></a></td>
+<td style="text-align:center">p[, r]</td>
+<td style="text-align:right">r-length tuples, all possible orderings, no repeated elements</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.combinations"><code>combinations()</code></a></td>
+<td style="text-align:center">p, r</td>
+<td style="text-align:right">r-length tuples, in sorted order, no repeated elements</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://docs.python.org/2/library/itertools.html#itertools.combinations_with_replacement"><code>combinations_with_replacement()</code></a></td>
+<td style="text-align:center">p, r</td>
+<td style="text-align:right">r-length tuples, in sorted order, with repeated elements</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>product('ABCD', repeat=2)</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:right"><code>AA AB AC AD BA BB BC BD CA CB CC CD DA DB DC DD</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>permutations('ABCD', 2)</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:right"><code>AB AC AD BA BC BD CA CB CD DA DB DC</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>combinations('ABCD', 2)</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:right"><code>AB AC AD BC BD CD</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>combinations_with_replacement('ABCD', 2)</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:right"><code>AA AB AC AD BB BC BD CC CD DD</code></td>
+</tr>
+</tbody>
+</table>
+<p>그 외에도 이터레이터에 Map, fliter, reduce &amp; lambda 를 사용하여 이터레이터와 함수간 매핑이 가능합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># map </span></span><br><span class="line">items = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">list(map(<span class="keyword">lambda</span> x : x**<span class="number">2</span>, items))</span><br><span class="line"></span><br><span class="line"><span class="comment"># filter</span></span><br><span class="line">number_list = raunge(<span class="number">-5</span>, <span class="number">5</span>)</span><br><span class="line">list(filter(<span class="keyword">lambda</span> x : x&lt;<span class="number">0</span>, number_list))</span><br><span class="line"></span><br><span class="line"><span class="comment"># reduce</span></span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce </span><br><span class="line">value = reduce((<span class="keyword">lambda</span> x,y : x+y), (x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">101</span>))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>제너레이터 장점(메모리, Lazy) + 함수형 언어(간결성, Lazy)</li>
+</ul>
 <h2><span id="참고">참고</span></h2>
-<p><a href="https://www.holaxprogramming.com/2017/04/16/github-page-and-hexo/">https://www.holaxprogramming.com/2017/04/16/github-page-and-hexo/</a></p>
-<p><a href="https://simhyejin.github.io/2016/06/24/hexo-themes/">https://simhyejin.github.io/2016/06/24/hexo-themes/</a></p>
-<p><a href="https://cheese10yun.github.io/blog-start/">https://cheese10yun.github.io/blog-start/</a></p>
-<p><a href="https://alleyful.github.io/">hexo 이카루스 블로그 Alley</a></p>
-<p><a href="https://blog.zhangruipeng.me/hexo-theme-icarus/Plugins/Share/sharethis-share-plugin/">hexo 이카루스 가이드라인</a></p>
+<p><a href="https://gone-sw.tistory.com/4">디자인 패턴이란</a></p>
+<p><a href="https://namu.wiki/w/%EB%94%94%EC%9E%90%EC%9D%B8%20%ED%8C%A8%ED%84%B4">나무위키_디자인패턴</a></p>
+<p><a href="https://docs.python.org/2/library/itertools.html">itertools</a></p>
+<p><a href="https://bluese05.tistory.com/56">ㅍㅍㅋㄷ  - 이터레이터, 제너레이터</a></p>
+<p><a href="https://docs.python.org/2/whatsnew/2.2.html#pep-234-iterators">python 2.2 doc</a></p>
+<p><a href="https://nowonbun.tistory.com/474">디자인 패턴 - 실무편</a></p>
+<p><a href="https://imasoftwareengineer.tistory.com/29">파사드 패턴 - 협업</a></p>
+<p><a href="https://github.com/jythontools/logbridge">파사드 패턴 - Logbridge</a></p>
 
         </div>
         
@@ -186,7 +375,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Blog/">Blog</a>, <a class="has-link-grey -link" href="/tags/Hexo/">Hexo</a>
+                    <a class="has-link-grey -link" href="/tags/Design-Pattern/">Design Pattern</a>
                 </div>
             </div>
         </div>
@@ -204,16 +393,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/03/05/Strategy_Pattern/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/02/16/Github_Blog_구축기/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Strategy Pattern</span>
+                <span class="level-item">깃허브 블로그 구축기</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/02/06/Iterator_Pattern/">
-                <span class="level-item">Iterator Pattern</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/02/01/Facade_Pattern/">
+                <span class="level-item">Facade Pattern</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -607,7 +796,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/coring.gif" alt="깃허브 블로그 구축기" height="28">
+                    <img src="/images/coring.gif" alt="Iterator Pattern" height="28">
                 
                 </a>
                 <p class="is-size-7">

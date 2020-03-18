@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html  lang="kr">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Observer Pattern - HoRang Blog</title>
+
+
+    <meta name="description" content="디자인 패턴  중요한 것은 디자인 패턴에 얽매이는 것이 아니라 그 패턴이 왜 효율적인 방식인지를 이해하여야 한다.  디자인 패턴 두 번째 발표자료이며 싱글턴, 옵저버 패턴에 대해 발표하겠습니다. 저는 저번 시간과 같이 패턴에 대해 다음과 같은 관점으로 접근하였습니다.   패턴이 된 원인(어떤 점이 효율적인가), 보완해야할 점(to 잡기술 배우기)   패턴이">
+<meta name="keywords" content="Design Pattern">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Observer Pattern">
+<meta property="og:url" content="https://hanhorang.github.io/2020/01/21/Observer_Pattern/index.html">
+<meta property="og:site_name" content="HoRang Blog">
+<meta property="og:description" content="디자인 패턴  중요한 것은 디자인 패턴에 얽매이는 것이 아니라 그 패턴이 왜 효율적인 방식인지를 이해하여야 한다.  디자인 패턴 두 번째 발표자료이며 싱글턴, 옵저버 패턴에 대해 발표하겠습니다. 저는 저번 시간과 같이 패턴에 대해 다음과 같은 관점으로 접근하였습니다.   패턴이 된 원인(어떤 점이 효율적인가), 보완해야할 점(to 잡기술 배우기)   패턴이">
+<meta property="og:locale" content="kr">
+<meta property="og:image" content="https://hanhorang.github.io/images/design.gif">
+<meta property="og:updated_time" content="2020-03-18T04:56:22.384Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Observer Pattern">
+<meta name="twitter:description" content="디자인 패턴  중요한 것은 디자인 패턴에 얽매이는 것이 아니라 그 패턴이 왜 효율적인 방식인지를 이해하여야 한다.  디자인 패턴 두 번째 발표자료이며 싱글턴, 옵저버 패턴에 대해 발표하겠습니다. 저는 저번 시간과 같이 패턴에 대해 다음과 같은 관점으로 접근하였습니다.   패턴이 된 원인(어떤 점이 효율적인가), 보완해야할 점(to 잡기술 배우기)   패턴이">
+<meta name="twitter:image" content="https://hanhorang.github.io/images/design.gif">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/coring.gif">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/coring.gif" alt="Observer Pattern" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/images/design.gif" alt="Observer Pattern">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-01-21T08:25:24.000Z">2020-01-21</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    13 minutes read (About 1881 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Observer Pattern
+            
+        </h1>
+        <div class="content">
+            <h2><span id="디자인-패턴">디자인 패턴</span></h2>
+<blockquote>
+<p>중요한 것은 디자인 패턴에 얽매이는 것이 아니라 그 패턴이 <strong>왜 효율적인 방식인지를 이해</strong>하여야 한다.</p>
+</blockquote>
+<p>디자인 패턴 두 번째 발표자료이며 <strong>싱글턴, 옵저버 패턴</strong>에 대해 발표하겠습니다.</p>
+<p>저는 저번 시간과 같이 패턴에 대해 다음과 같은 관점으로 접근하였습니다.</p>
+<ul>
+<li>
+<p>패턴이 된 원인(어떤 점이 효율적인가), 보완해야할 점(to 잡기술 배우기)</p>
+</li>
+<li>
+<p>패턴이 현대 프로그래밍 언어에서는 어떻게 사용되는가?</p>
+</li>
+</ul>
+<h2><span id="옵저버-패턴">옵저버 패턴</span></h2>
+<p><strong>옵저버 패턴</strong>(observer pattern)은 <a href="https://ko.wikipedia.org/wiki/%EA%B0%9D%EC%B2%B4_(%EC%BB%B4%ED%93%A8%ED%84%B0_%EA%B3%BC%ED%95%99)">객체</a>의 상태 변화를 관찰하는 관찰자들, 즉 옵저버들의 목록을 객체에 등록하여 상태 변화가 있을 때마다 <a href="https://ko.wikipedia.org/wiki/%EB%A9%94%EC%84%9C%EB%93%9C">메서드</a> 등을 통해 객체가 직접 목록의 각 옵저버에게 통지하도록 하는 <a href="https://ko.wikipedia.org/wiki/%EB%94%94%EC%9E%90%EC%9D%B8_%ED%8C%A8%ED%84%B4">디자인 패턴</a> 입니다.</p>
+<p>**왜 사용할까 ? **</p>
+<p>객체 간의 일대 다 종속성 관계를 관리할 때 사용됩니다.</p>
+<ul>
+<li>객체 간의 밀접한 관계없이 객체 간의 일대 다 종속성을 정의해야 합니다.</li>
+<li>하나의 객체가 상태를 변경할 때 개방형 수의 종속 객체가 자동으로 업데이트되도록 해야합니다.</li>
+<li>한 객체가 개방 된 수의 다른 객체를 통지 할 수 있어야합니다.</li>
+</ul>
+<p><strong>어떻게 구현할까?</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Observable</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        self._observers = []</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">register_observer</span><span class="params">(self, observer)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        self._observers.append(observer)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">notify_observers</span><span class="params">(self, *args, **kwargs)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        <span class="keyword">for</span> observer <span class="keyword">in</span> self._observers:</span><br><span class="line">            observer.notify(self, *args, **kwargs)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Observer</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, observable)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        observable.register_observer(self)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">notify</span><span class="params">(self, observable, *args, **kwargs)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        print(<span class="string">'Got'</span>, args, kwargs, <span class="string">'From'</span>, observable)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">subject = Observable()</span><br><span class="line">observer = Observer(subject)</span><br><span class="line">subject.notify_observers(<span class="string">'test'</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>주체에 따라 Push, Pull 방식으로 나눠집니다. (자료 보강 필요 ㅠㅠ)</li>
+</ul>
+<h4><span id="한계">한계</span></h4>
+<p>하지만, <strong>옵저버 패턴의 한계</strong>도 존재합니다.</p>
+<p>개체 간의 일대 다 종속성 정의는 대상을 특정 종속 개체에 연결하기 때문에 융통성이 없습니다. 이는 성능이 필요한 상황에서는 (초당 수천 번 실행되는 <strong>저수준 커널 구조</strong>를 고려할 때) 고민해봐야할 문제입니다.  밀접하게 연결된 객체는 일부 시나리오에서 구현하기가 어려울 수 있으며 인터페이스가 다른 여러 객체를 참조하고 업데이트하는 방법을 알고 있기 때문에 재사용 할 수 있어 기대하지 않은 결과를 초래할 수 있습니다.</p>
+<p>또한, 옵저버 패턴인 경우 메모리 누수를 초래할 수 있습니다.</p>
+<blockquote>
+<h3><span id="so-what-can-possibly-go-wrong">So what can possibly go wrong?</span></h3>
+<p>In a runtime where memory is managed automatically like Java or C#, the <strong>subject holds a strong reference</strong> to the observers, keeping them alive. The strong reference from the subject (the observed object) to the observer, prevents the observer (and any objects it references) from being <strong>garbage collected</strong> until the observer is unregistered. A <strong>memory leak</strong> happens, if the observer fails to unregister from the subject when it no longer needs to receive notifications. In our countdown timer example if observers do not call unregister when they become invisible, they will receive notifications and waste CPU cycles updating invisible UI elements. This issue is called <a href="https://en.wikipedia.org/wiki/Lapsed_listener_problem">Lapsed Listener Problem</a>.</p>
+<p>If you implement the observer pattern in C++ (no garbage collection, memory is managed manually) and you call <strong>delete</strong> on one of the observers without unregistering it from the subject then you are in trouble. Now you have a dangling pointer that points to invalid data. Whenever the subject notifies its observers a <strong>segmentation fault</strong> will be raised.</p>
+<h4><span id="always-unregister-your-listeners-unless-they-are-interested-in-receiving-notifications">Always unregister your listeners unless they are interested in receiving notifications.</span></h4>
+<p>Another approach for dealing with lapsed listeners (observers) is to use <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/ref/WeakReference.html">Weak References</a>.</p>
+<p>The below implementation of CountDownTimer uses weak references to keep track of registered observers. If the only references to an instance are weak references, then the instance becomes a candidate for Garbage Collection. In contrast to strong references, weak references don’t prevent garbage collector to finilize the instance and reclaim its memory.</p>
+</blockquote>
+<p>사실 이는 옵저버 패턴뿐만 아니라 OOP 객체를 다룰 때 공통적으로 발생할 수 있는 문제입니다. 단적인 해결방법은 <code>Weakreference</code> 를 사용하여 수동적으로 가비지 컬렉션을 사용한다고 명시하면 예방할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> codekata.observer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.ref.WeakReference;</span><br><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CountDownTimer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">long</span> ONE_SECOND = <span class="number">1000L</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> countDownMillis;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> elapsedTimeSinceLastTick;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> totalElapsedTime;</span><br><span class="line">    <span class="keyword">private</span> List&lt;WeakReference&lt;CountDownObserver&gt;&gt; observers = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CountDownTimer</span><span class="params">(<span class="keyword">long</span> initialValue)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.countDownMillis = initialValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Called every frame</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">long</span> deltaTime)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (isFinished()) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (totalElapsedTime == <span class="number">0</span>) &#123;</span><br><span class="line">            notifyStart();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        totalElapsedTime += deltaTime;</span><br><span class="line">        elapsedTimeSinceLastTick += deltaTime;</span><br><span class="line">        <span class="keyword">if</span> (elapsedTimeSinceLastTick &gt;= ONE_SECOND) &#123;</span><br><span class="line">            elapsedTimeSinceLastTick = <span class="number">0</span>;</span><br><span class="line">            notifyCountDown();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (isFinished()) &#123;</span><br><span class="line">            notifyCountDown();</span><br><span class="line">            notifyFinish();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isFinished</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> totalElapsedTime &gt;= countDownMillis;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">notifyCountDown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(WeakReference&lt;CountDownObserver&gt; ref : <span class="keyword">this</span>.observers) &#123;</span><br><span class="line">            CountDownObserver observer = ref.get();</span><br><span class="line">            <span class="keyword">if</span> (observer != <span class="keyword">null</span>) &#123;</span><br><span class="line">                observer.onCountDown(</span><br><span class="line">                        totalElapsedTime,</span><br><span class="line">                        Math.max(<span class="number">0</span>, (countDownMillis - totalElapsedTime)));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">"!!! DELETED"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">notifyStart</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(WeakReference&lt;CountDownObserver&gt; ref : <span class="keyword">this</span>.observers) &#123;</span><br><span class="line">            CountDownObserver observer = ref.get();</span><br><span class="line">            <span class="keyword">if</span> (observer != <span class="keyword">null</span>) &#123;</span><br><span class="line">                observer.onStart();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">notifyFinish</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(WeakReference&lt;CountDownObserver&gt; ref : <span class="keyword">this</span>.observers) &#123;</span><br><span class="line">            CountDownObserver observer = ref.get();</span><br><span class="line">            <span class="keyword">if</span> (observer != <span class="keyword">null</span>) &#123;</span><br><span class="line">                observer.onFinish();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerObserver</span><span class="params">(CountDownObserver observer)</span> </span>&#123;</span><br><span class="line">        WeakReference&lt;CountDownObserver&gt; weakReference = findWeakReference(observer);</span><br><span class="line">        <span class="keyword">if</span> (weakReference == <span class="keyword">null</span>) &#123;</span><br><span class="line">            weakReference = <span class="keyword">new</span> WeakReference&lt;&gt;(observer);</span><br><span class="line">            <span class="keyword">this</span>.observers.add(weakReference);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unregisterObserver</span><span class="params">(CountDownObserver observer)</span> </span>&#123;</span><br><span class="line">        WeakReference&lt;CountDownObserver&gt; weakReference = findWeakReference(observer);</span><br><span class="line">        <span class="keyword">if</span> (weakReference != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.observers.remove(weakReference);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> WeakReference&lt;CountDownObserver&gt; <span class="title">findWeakReference</span><span class="params">(CountDownObserver observer)</span> </span>&#123;</span><br><span class="line">        WeakReference&lt;CountDownObserver&gt; weakReference = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">for</span>(WeakReference&lt;CountDownObserver&gt; ref : <span class="keyword">this</span>.observers) &#123;</span><br><span class="line">            <span class="keyword">if</span> (ref.get() == observer) &#123;</span><br><span class="line">                weakReference = ref;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> weakReference;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>자바 고수의 도움이 필요합니다.</li>
+</ul>
+<p><strong>그럼에도 불구하고…</strong></p>
+<p>옵저버 패턴에서의 객체 관리는 <code>링크리스트</code> 로 저장합니다. 하지만 이는 단일 스레드에서만 해당되는 예기로 멀티스레드 상황에서 Thread-safe 상황을 보장하지 못합니다.</p>
+<h4><span id="그렇다면-어디에-사용해볼까">그렇다면 어디에 사용해볼까?</span></h4>
+<p>대표적으로 MVC 아키텍처에서 사용할 수 있습니다.  MVC 는 Model-View-Controller 로 소프트웨어 디자인 패턴입니다.  사용자 인터페이스로부터 비지니스 로직을 분리하여 애플리케이션의 시각적 요소나 그 이면에서 실행되는 비즈니스 로직을 서로 영향 없이 쉽게 고칠 수 있는 애플리케이션을 만들 수 있습니다.</p>
+<p>![Observer Pattern](C:\Users\user\Desktop\공부\CS Study\Design Pattern\Observer Pattern.PNG)</p>
+<ul>
+<li>Model은 애플리케이션의 정보(데이터)를 나타내며,View는 텍스트, 체크박스 항목 등과 같은 사용자 인터페이스 요소를 나타내고, Controller는 데이터와 비즈니스 로직 사이의 상호동작을 관리한다.</li>
+</ul>
+<p>MVC가 활용된 예로 Qt, MFC 프레임워크가 있는 데 MFC 프레임워크에서의 옵서버 패턴 사용을 살펴보겠습니다.</p>
+<p>![MFC1](C:\Users\user\Desktop\공부\CS Study\Design Pattern\MFC1.PNG)</p>
+<ul>
+<li>먼저 뷰를 원하는 곳에 배치합니다.</li>
+</ul>
+<p>![MFC2](C:\Users\user\Desktop\공부\CS Study\Design Pattern\MFC2.PNG)</p>
+<ul>
+<li>뷰를 배치함과 동시에 컨트롤러 코드가 자동으로 생성됩니다.</li>
+</ul>
+<p>![MFC3](C:\Users\user\Desktop\공부\CS Study\Design Pattern\MFC3.PNG)</p>
+<ul>
+<li>컨트롤러 코드를 작성하여 이벤트가 발생했을 시 구현할 내용을 작성합니다.</li>
+</ul>
+<h4><span id="사용처">사용처?</span></h4>
+<p>MVC 같은 경우 기능의 On/OFF 인 상태가 다수일 경우 사용하기 좋습니다.  곰플레이어에서의 동영상 관련 기능 이벤트나 한글의 여러 기능을 예로 생각하면 이해하기 편할 것 같습니다.</p>
+<p>참고</p>
+<p><a href="https://en.wikipedia.org/wiki/Observer_pattern">위키백과 옵서버패턴</a></p>
+<p><a href="https://includestdio.tistory.com/39">옵서버 방식 두가지</a></p>
+<p><a href="https://doohyun.tistory.com/82">https://doohyun.tistory.com/82</a></p>
+<p><a href="https://www.dofactory.com/topic/1167/chain-of-responsibility-vs-observer-pattern.aspx">로깅 - 옵저버 vs 책임연쇄</a></p>
+<p><a href="http://ilkinulas.github.io/development/general/2016/04/17/observer-pattern.html">옵서버패턴에서의 메모리릭</a></p>
+<p><a href="https://glikmakesworld.tistory.com/3">https://glikmakesworld.tistory.com/3</a> 예시</p>
+<p><a href="https://nowonbun.tistory.com/480">https://nowonbun.tistory.com/480</a> 실무</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Design-Pattern/">Design Pattern</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/01/29/SingleTon_Pattern/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Singleton Pattern</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/01/17/함수형언어_모나드_in_파이썬_.md/">
+                <span class="level-item">함수형 언어 모나드편 in 파이썬</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/Face.jpg" alt="Han">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Han
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        뎁린이의 성장기록용 아카이브
+                    </p>
+                    
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            8
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            4
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            5
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/HanHoRang" target="_blank" rel="noopener">
+                Follow</a>
+        </div>
+        
+        
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/HanHoRang" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Github</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Programming-Paradigm/">
+            <span class="level-start">
+                <span class="level-item">Programming Paradigm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Programming-Paradigm/Functional-Programming/">
+            <span class="level-start">
+                <span class="level-item">Functional Programming</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Tools/">
+            <span class="level-start">
+                <span class="level-item">Tools</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Tools/Hexo/">
+            <span class="level-start">
+                <span class="level-item">Hexo</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/Blog/" style="font-size: 10px;">Blog</a> <a href="/tags/Design-Pattern/" style="font-size: 20px;">Design Pattern</a> <a href="/tags/Functional-Programming/" style="font-size: 15px;">Functional Programming</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/03/05/Strategy_Pattern/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/design.gif" alt="Strategy Pattern">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-05T08:25:24.000Z">2020-03-05</time></div>
+                    <a href="/2020/03/05/Strategy_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Strategy Pattern</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/02/16/Github_Blog_구축기/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/hexo.jpg" alt="깃허브 블로그 구축기">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-16T07:25:24.000Z">2020-02-16</time></div>
+                    <a href="/2020/02/16/Github_Blog_구축기/" class="title has-link-black-ter is-size-6 has-text-weight-normal">깃허브 블로그 구축기</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Tools/">Tools</a> / <a class="has-link-grey -link" href="/categories/Tools/Hexo/">Hexo</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/02/06/Iterator_Pattern/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/design.gif" alt="Iterator Pattern">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-06T08:25:24.000Z">2020-02-06</time></div>
+                    <a href="/2020/02/06/Iterator_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Iterator Pattern</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/02/01/Facade_Pattern/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/design.gif" alt="Facade Pattern">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-01T08:25:24.000Z">2020-02-01</time></div>
+                    <a href="/2020/02/01/Facade_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Facade Pattern</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/01/29/SingleTon_Pattern/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/design.gif" alt="Singleton Pattern">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-29T08:25:24.000Z">2020-01-29</time></div>
+                    <a href="/2020/01/29/SingleTon_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Singleton Pattern</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Blog/">
+                        <span class="tag">Blog</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Design-Pattern/">
+                        <span class="tag">Design Pattern</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Functional-Programming/">
+                        <span class="tag">Functional Programming</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/coring.gif" alt="Observer Pattern" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 HoRang&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("kr");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://hanhorang.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

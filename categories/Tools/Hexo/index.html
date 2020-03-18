@@ -7,13 +7,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Categories - HoRang Blog</title>
+<title>Category: Hexo - HoRang Blog</title>
 
 
-    <meta name="keywords" content="Design Pattern,Python,Functional Programming,Hexo,Blog">
-<meta property="og:type" content="website">
+    <meta property="og:type" content="website">
 <meta property="og:title" content="HoRang Blog">
-<meta property="og:url" content="https://hanhorang.github.io/categories/index.html">
+<meta property="og:url" content="https://hanhorang.github.io/categories/Tools/Hexo/index.html">
 <meta property="og:site_name" content="HoRang Blog">
 <meta property="og:locale" content="kr">
 <meta property="og:image" content="https://hanhorang.github.io/images/og_image.png">
@@ -91,7 +90,7 @@
                 <a class="navbar-item"
                 href="/archives">Archives</a>
                 
-                <a class="navbar-item is-active"
+                <a class="navbar-item"
                 href="/categories">Categories</a>
                 
                 <a class="navbar-item"
@@ -123,51 +122,88 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
-<div class="card widget">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main"><div class="card">
     <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                Categories
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/Programming-Paradigm/">
-            <span class="level-start">
-                <span class="level-item">Programming Paradigm</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Programming-Paradigm/Functional-Programming/">
-            <span class="level-start">
-                <span class="level-item">Functional Programming</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Tools/">
-            <span class="level-start">
-                <span class="level-item">Tools</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Tools/Hexo/">
-            <span class="level-start">
-                <span class="level-item">Hexo</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li></ul></li>
-            </ul>
-        </div>
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/categories">Categories</a></li>
+            
+            <li><a href="/categories/Tools/">Tools</a></li>
+            
+            <li class="is-active"><a href="#" aria-current="page">Hexo</a></li>
+        </ul>
+        </nav>
     </div>
-</div></div>
+</div>
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/2020/02/16/Github_Blog_구축기/" class="image is-7by1">
+            <img class="thumbnail" src="/images/hexo.jpg" alt="깃허브 블로그 구축기">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-02-16T07:25:24.000Z">2020-02-16</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Tools/">Tools</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Tools/Hexo/">Hexo</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 227 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/02/16/Github_Blog_구축기/">깃허브 블로그 구축기</a>
+            
+        </h1>
+        <div class="content">
+            <h1><span id="github-blog-구축">Github Blog 구축</span></h1>
+<p>기술 블로그용으로 깃허브을 택하여 구축하는 과정에서 생기는 에러에 대한 해결 방법을 정리하였습니다.</p>
+<p>제가 참조하여 따라한 링크는 <a href="https://www.holaxprogramming.com/2017/04/16/github-page-and-hexo/">다음</a>과 같으며, 테스트는 Ubuntu16.04 에서 진행하였습니다.</p>
+<p><strong>Hexo install 에러</strong></p>
+<p>ubuntu16.04 에서 Nodejs Version 의존성 문제로 업데이트 필요, NVM 설치</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">export</span> NVM_DIR=<span class="string">"<span class="variable">$HOME</span>/.nvm"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> [ -s <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span> ] &amp;&amp; . <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> nvm install 10.0</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> nvm use 10.0</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo install</span></span><br></pre></td></tr></table></figure>
+<p>**Deployer not found: git  :: hexo deploy **</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
+<p><strong>블로그 업데이트하기</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo deploy --<span class="keyword">generate</span></span><br></pre></td></tr></table></figure>
+<h2><span id="참고">참고</span></h2>
+<p><a href="https://www.holaxprogramming.com/2017/04/16/github-page-and-hexo/">https://www.holaxprogramming.com/2017/04/16/github-page-and-hexo/</a></p>
+<p><a href="https://simhyejin.github.io/2016/06/24/hexo-themes/">https://simhyejin.github.io/2016/06/24/hexo-themes/</a></p>
+<p><a href="https://cheese10yun.github.io/blog-start/">https://cheese10yun.github.io/blog-start/</a></p>
+<p><a href="https://alleyful.github.io/">hexo 이카루스 블로그 Alley</a></p>
+<p><a href="https://blog.zhangruipeng.me/hexo-theme-icarus/Plugins/Share/sharethis-share-plugin/">hexo 이카루스 가이드라인</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+</div>
                 
                 
 

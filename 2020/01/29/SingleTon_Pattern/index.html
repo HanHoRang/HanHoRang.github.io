@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html  lang="kr">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Singleton Pattern - HoRang Blog</title>
+
+
+    <meta name="description" content="디자인 패턴(2)  중요한 것은 디자인 패턴에 얽매이는 것이 아니라 그 패턴이 왜 효율적인 방식인지를 이해하여야 한다.  디자인 패턴 두 번째 발표자료이며 싱글턴, 옵저버 패턴에 대해 발표하겠습니다. 저는 저번 시간과 같이 패턴에 대해 다음과 같은 관점으로 접근하였습니다.   패턴이 된 원인(어떤 점이 효율적인가), 보완해야할 점(to 잡기술 배우기)">
+<meta name="keywords" content="Design Pattern">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Singleton Pattern">
+<meta property="og:url" content="https://hanhorang.github.io/2020/01/29/SingleTon_Pattern/index.html">
+<meta property="og:site_name" content="HoRang Blog">
+<meta property="og:description" content="디자인 패턴(2)  중요한 것은 디자인 패턴에 얽매이는 것이 아니라 그 패턴이 왜 효율적인 방식인지를 이해하여야 한다.  디자인 패턴 두 번째 발표자료이며 싱글턴, 옵저버 패턴에 대해 발표하겠습니다. 저는 저번 시간과 같이 패턴에 대해 다음과 같은 관점으로 접근하였습니다.   패턴이 된 원인(어떤 점이 효율적인가), 보완해야할 점(to 잡기술 배우기)">
+<meta property="og:locale" content="kr">
+<meta property="og:image" content="https://hanhorang.github.io/images/design.gif">
+<meta property="og:updated_time" content="2020-03-18T04:56:35.952Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Singleton Pattern">
+<meta name="twitter:description" content="디자인 패턴(2)  중요한 것은 디자인 패턴에 얽매이는 것이 아니라 그 패턴이 왜 효율적인 방식인지를 이해하여야 한다.  디자인 패턴 두 번째 발표자료이며 싱글턴, 옵저버 패턴에 대해 발표하겠습니다. 저는 저번 시간과 같이 패턴에 대해 다음과 같은 관점으로 접근하였습니다.   패턴이 된 원인(어떤 점이 효율적인가), 보완해야할 점(to 잡기술 배우기)">
+<meta name="twitter:image" content="https://hanhorang.github.io/images/design.gif">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/coring.gif">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/coring.gif" alt="Singleton Pattern" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/images/design.gif" alt="Singleton Pattern">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-01-29T08:25:24.000Z">2020-01-29</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    13 minutes read (About 1937 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Singleton Pattern
+            
+        </h1>
+        <div class="content">
+            <h2><span id="디자인-패턴2">디자인 패턴(2)</span></h2>
+<blockquote>
+<p>중요한 것은 디자인 패턴에 얽매이는 것이 아니라 그 패턴이 <strong>왜 효율적인 방식인지를 이해</strong>하여야 한다.</p>
+</blockquote>
+<p>디자인 패턴 두 번째 발표자료이며 <strong>싱글턴, 옵저버 패턴</strong>에 대해 발표하겠습니다.</p>
+<p>저는 저번 시간과 같이 패턴에 대해 다음과 같은 관점으로 접근하였습니다.</p>
+<ul>
+<li>
+<p>패턴이 된 원인(어떤 점이 효율적인가), 보완해야할 점(to 잡기술 배우기)</p>
+</li>
+<li>
+<p>패턴이 현대 프로그래밍 언어에서는 어떻게 사용되는가?</p>
+</li>
+</ul>
+<h3><span id="싱글턴-패턴">싱글턴 패턴</span></h3>
+<p><strong>싱글턴 패턴</strong>(Singleton pattern)을 따르는 클래스는, 생성자가 여러 차례 호출되더라도 실제로 생성되는 객체는 하나이고 최초 생성 이후에 호출된 생성자는 최초의 생성자가 생성한 객체를 리턴한다. 이와 같은 디자인 유형을 <strong>싱글턴 패턴</strong>이라고 한다. 주로 공통된 객체를 여러개 생성해서 사용하는 DBCP(DataBase Connection Pool)와 같은 상황에서 많이 사용된다.  [위키미러]</p>
+<h4><span id="왜-사용할까">왜 사용할까 ?</span></h4>
+<p>클래스 내에서 인스턴스가 단 하나뿐임을 보장하므로, 프로그램 전역에서 해당 클래스의 인스턴스를 바로 얻을 수 있고, 불필요한 메모리 낭비를 최소화한다.</p>
+<h4><span id="어떻게-구현할까">어떻게 구현할까 ?</span></h4>
+<p><strong><code>__new__</code> 생성자 와 메타클래스 를 통해 구현한 싱글턴</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span><span class="params">(object)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> hasattr(self, <span class="string">'instance'</span>):</span><br><span class="line">            self.Instance = super(Singleton, self).__new__(self)</span><br><span class="line">            <span class="keyword">return</span> self.self.instance</span><br><span class="line">        </span><br><span class="line">s = singleton()</span><br><span class="line">s2 = singleton()</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Object created"</span>, s)</span><br><span class="line">print(<span class="string">"Object created"</span>, s2)</span><br><span class="line"></span><br><span class="line">output</span><br><span class="line">Object created &lt;__main__.Singleton object at <span class="number">0x0000028014344EF0</span>&gt;</span><br><span class="line">Object created &lt;__main__.Singleton object at <span class="number">0x0000028014344EF0</span>&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>python 의 <code>__new__</code> 생성자를 사용하여 싱글턴 구현</p>
+<ul>
+<li><code>__new__</code> ? <code>__init__</code> 이 반환 값을 가질 수 없는 것을 보완한 생성자</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MetaSingleton</span><span class="params">(type)</span>:</span></span><br><span class="line">    _instances = &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, *args, **kwargs)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self <span class="keyword">not</span> <span class="keyword">in</span> self._instances:</span><br><span class="line">            self._instances[self] = super(MetaSingleton, self).__call__(*args, **kwargs)</span><br><span class="line">            <span class="keyword">return</span> self._instances[self]</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Logger</span><span class="params">(metaclass = MetaSingleton)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p><strong>싱글턴 변형, 객체는 다르지만 상태를 공유함</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton2</span>:</span></span><br><span class="line">    __shard_state = &#123;<span class="string">"1"</span>:<span class="string">"2"</span>&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.x = <span class="number">1</span></span><br><span class="line">        self.__dict__ = self.__shared_state</span><br><span class="line">        <span class="keyword">pass</span> </span><br><span class="line">    </span><br><span class="line">b1 = Singleton2();</span><br><span class="line">b2 = Singleton2();</span><br><span class="line">b1.x = <span class="number">5</span></span><br><span class="line"></span><br><span class="line">output</span><br><span class="line">&lt;__main__.LazySingleton object at <span class="number">0x0000028014357F60</span>&gt;</span><br><span class="line">&lt;__main__.LazySingleton object at <span class="number">0x0000028014357F98</span>&gt;</span><br><span class="line">&#123;<span class="string">'1'</span>: <span class="string">'2'</span>, <span class="string">'x'</span>: <span class="number">5</span>&#125;</span><br><span class="line">&#123;<span class="string">'1'</span>: <span class="string">'2'</span>, <span class="string">'x'</span>: <span class="number">5</span>&#125;</span><br></pre></td></tr></table></figure>
+<h4><span id="싱글턴의-문제점">싱글턴의 문제점</span></h4>
+<p>싱글턴 인스턴스가 많은 일을 하거나 데이터를 공유시킬 경우 다른 클래스의 인스턴스들간의 결합도가 높아져 OOP 원칙, &quot;개방-폐쇠 원칙&quot;을 위해하게 된다. 따라서 수정이 어려워지고 테스트하기 어려워진다.</p>
+<p>또한, <strong>멀티쓰레드 환경에서 동기화처리</strong>를 안하면 인스턴스가 두 개가 생성되는 경우가 발생할 수 있음</p>
+<p>결과적으로 ‘goto는 쓰면 안돼’ , ‘전역 객체는 안좋은거야!’ 라는 말 처럼 꼭 필요한 경우가 아니면 지양해야한다.</p>
+<p><strong>멀티쓰레드에서 안전한 싱클톤 클래스 생성하기</strong></p>
+<p>Java 테스트했으며 3가지의 방법을 소개하겠습니다.</p>
+<ol>
+<li><code>Synchronized</code> 를 통한 Thread safe Lazy initialization(게으른 초기화)</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadSafeLazyInitialization</span></span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ThreadSafeLazyInitialization instance;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">ThreadSafeLazyInitialization</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> ThreadSafeLazyInitialization <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">            instance = <span class="keyword">new</span> ThreadSafeLazyInitialization();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>private 생성자로 외부에서의 생성을 막았으나, synchronized 특성상 큰 성능저하가 발생하므로 권장하지 않는다</li>
+</ul>
+<ol start="2">
+<li>Synchronized 대신 가정문 사용하기,  Thread safe lazy initialization + Double-checked locking</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadSafeLazyInitialization</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> ThreadSafeLazyInitialization instance;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">ThreadSafeLazyInitialization</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ThreadSafeLazyInitialization <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(instance == <span class="keyword">null</span>)&#123; </span><br><span class="line">            <span class="keyword">synchronized</span> (ThreadSafeLazyInitialization<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(instance == <span class="keyword">null</span>)</span><br><span class="line">                    instance = <span class="keyword">new</span> ThreadSafeLazyInitialization();</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>synchronized 를 사용하는 것이 아니라 If 문 두번(확인, 동기화)으로 성능 저하를 피했지만 완벽한 방법(개발자가 직접 문제를 회피해야할 코드를 짜야함)은 아닙니다.</li>
+</ul>
+<ol start="3">
+<li><code>final</code> 을 사용한 Initialization on demand holder idiom</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Something</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Something</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">LazyHolder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Something INSTANCE = <span class="keyword">new</span> Something();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Something <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> LazyHolder.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>개발자가 직접 동기화 문제에 대해 코드를 작성하여 문제를 회피하려 한다면 프로그램 구조가 그 만큼 복잡해지고 비용 문제가 생길 수 있고 특히 유지보수 측면에서 이상적이지 못합니다. 이 방법은 JVM의 클래스 초기화 과정에서 보장되는 원자적 특성을 이용하여 싱글턴의 초기화 문제에 대한 <strong>책임을 JVM에 떠넘긴다.</strong></p>
+<p>holder안에 선언된 instance가 static이기 때문에 클래스 로딩시점에 한번만 호출될 것이며 final을 사용해 다시 값이 할당되지 않도록 만든 방법.</p>
+<p>*** 가장 많이 사용하고 일반적인 Singleton 클래스 사용 방법이다.**</p>
+</li>
+</ul>
+<h4><span id="현-트렌드에서의-싱글턴">현 트렌드에서의 싱글턴?</span></h4>
+<p>여기까지 살펴보았을 때, 배(그냥 코드로 사용하기)보다 배꼽(싱글턴 패턴 사용)이 더 큰 상황이라 느꼈습니다.  그래서 현업에서는 싱글턴을 사용해야할 상황일 때 실제 사용하나? 가 궁금해서 생각해봤습니다.</p>
+<p>위키미러를 참고했을 때 싱글턴의 활용처는 DBCP(DataBase Connection Pool)와 같은 상황입니다. 그러면 현 트랜드에서는 DBCP를 싱글턴을 통해 활용하고 있을까요?</p>
+<p>답변부터 드리면,  구글(go, Kotlin)에서는 싱글턴의 <code>Initialization on demand holder idiom</code> 을 문법으로 구현하는 추세입니다.</p>
+<p><code>go</code> - <a href="http://Once.do">Once.do</a> 활용</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> once sync.Once</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> DriverPg <span class="keyword">struct</span> &#123;</span><br><span class="line">	conn <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// variavel Global</span></span><br><span class="line"><span class="keyword">var</span> instance *DriverPg</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Connect</span><span class="params">()</span> *<span class="title">DriverPg</span></span> &#123;</span><br><span class="line">	once.Do(<span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		instance = &amp;DriverPg&#123;conn: <span class="string">"DriverConnectPostgres"</span>&#125;</span><br><span class="line">        <span class="comment">//DB 연결 처리 </span></span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> instance</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// chamada</span></span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		time.Sleep(time.Millisecond * <span class="number">600</span>)</span><br><span class="line">		fmt.Println(*Connect())</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 100 goroutine</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(ix <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">			time.Sleep(time.Millisecond * <span class="number">60</span>)</span><br><span class="line">			fmt.Println(ix, <span class="string">" = "</span>, Connect().conn)</span><br><span class="line">		&#125;(i)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Scanln()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>동기라이브러리안 <code>Once</code> keyword 이용하여  Initialization on demand holder idiom 구현</li>
+</ul>
+<p><code>kotlin</code>- Object 활용</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span> Payroll &#123; <span class="comment">//object 클래스 생성으로 싱글턴을 구현</span></span><br><span class="line">    <span class="keyword">val</span> allEmplyees = arrayListOf&lt;Person&gt;()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">calculateSalary</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//사용</span></span><br><span class="line">Payroll.calculateSalary() <span class="comment">//싱글턴처럼 . 으로 접근</span></span><br><span class="line">Payroll.allEmplyees.add(Person(<span class="string">"zerog"</span>, Company(<span class="string">"zerog"</span>, Address(<span class="string">""</span>))))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>객체(Object)는 <strong>클래스 선언과 그 클래스에 속한 단일 인스턴스의 생성을</strong> 동시에 처리해주기 때문에 싱글톤에 사용하기 적합합니다.  double-checked locking 같은 locking 알고리즘에 의존하는 것 없이 thread-safe 하고 lazy 한 초기화를 가능하게 해 주기 때문에 JVM에서 싱글톤을 구현하는 방법으로 선호됩니다. 코틀린에서 간단하게 object를 선언하면, 안전하고 효율적인 싱글톤 구현을 보장받을 수 있습니다.</li>
+</ul>
+<h4><span id="정리">정리</span></h4>
+<p>싱글톤의 원리와 구현방법을 살펴보았습니다. 전역 객체를 생성하여 접근하여 메모리 측면의 효율성을 기대하는 패턴이지만, 쓰레드에서의 싱글톤과 OOP 기법의 안정성을 위해 Initialization on demand holder idiom  기법을사용하여 싱글톤을 구현하는 것이 바람직합니다. 더불어 현 구글 언어(go, kotilin)에서는 해당 기법이 문법으로 소개되어있으며 사용하시는 데 참고하시면 되겠습니다.</p>
+<h3><span id="참고">참고</span></h3>
+<p><a href="https://ko.wikipedia.org/wiki/%EC%8B%B1%EA%B8%80%ED%84%B4_%ED%8C%A8%ED%84%B4">위키백과_싱글턴 패턴</a></p>
+<p><a href="https://tourspace.tistory.com/109">https://tourspace.tistory.com/109</a></p>
+<p><a href="https://takhyeongmin.github.io/2019/06/24/HowToKotlinSingleTon/">https://takhyeongmin.github.io/2019/06/24/HowToKotlinSingleTon/</a></p>
+<p><a href="https://fenderist.tistory.com/109">https://fenderist.tistory.com/109</a></p>
+<p><a href="https://www.fun-coding.org/PL&amp;OOP2-2.html">https://www.fun-coding.org/PL&amp;OOP2-2.html</a></p>
+<p><a href="https://wikidocs.net/3693">기본적인 싱글톤 구현방법 5가지</a></p>
+<p><a href="https://limkydev.tistory.com/67">싱글톤의 고도화</a></p>
+<p><a href="https://jeong-pro.tistory.com/86">싱글톤 문제점과 3가지 해결방안</a></p>
+<p><a href="https://medium.com/golang-issue/how-singleton-pattern-works-with-golang-2fdd61cd5a7f">고랭-싱글톤</a></p>
+<p><a href="https://beomseok95.tistory.com/239">코틀린-싱글톤</a></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Design-Pattern/">Design Pattern</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/02/01/Facade_Pattern/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Facade Pattern</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/01/21/Observer_Pattern/">
+                <span class="level-item">Observer Pattern</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/Face.jpg" alt="Han">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Han
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        뎁린이의 성장기록용 아카이브
+                    </p>
+                    
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            8
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            4
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            5
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/HanHoRang" target="_blank" rel="noopener">
+                Follow</a>
+        </div>
+        
+        
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/HanHoRang" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Github</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Programming-Paradigm/">
+            <span class="level-start">
+                <span class="level-item">Programming Paradigm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Programming-Paradigm/Functional-Programming/">
+            <span class="level-start">
+                <span class="level-item">Functional Programming</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Tools/">
+            <span class="level-start">
+                <span class="level-item">Tools</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Tools/Hexo/">
+            <span class="level-start">
+                <span class="level-item">Hexo</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/Blog/" style="font-size: 10px;">Blog</a> <a href="/tags/Design-Pattern/" style="font-size: 20px;">Design Pattern</a> <a href="/tags/Functional-Programming/" style="font-size: 15px;">Functional Programming</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/03/05/Strategy_Pattern/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/design.gif" alt="Strategy Pattern">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-05T08:25:24.000Z">2020-03-05</time></div>
+                    <a href="/2020/03/05/Strategy_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Strategy Pattern</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/02/16/Github_Blog_구축기/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/hexo.jpg" alt="깃허브 블로그 구축기">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-16T07:25:24.000Z">2020-02-16</time></div>
+                    <a href="/2020/02/16/Github_Blog_구축기/" class="title has-link-black-ter is-size-6 has-text-weight-normal">깃허브 블로그 구축기</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Tools/">Tools</a> / <a class="has-link-grey -link" href="/categories/Tools/Hexo/">Hexo</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/02/06/Iterator_Pattern/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/design.gif" alt="Iterator Pattern">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-06T08:25:24.000Z">2020-02-06</time></div>
+                    <a href="/2020/02/06/Iterator_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Iterator Pattern</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/02/01/Facade_Pattern/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/design.gif" alt="Facade Pattern">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-01T08:25:24.000Z">2020-02-01</time></div>
+                    <a href="/2020/02/01/Facade_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Facade Pattern</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/01/29/SingleTon_Pattern/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/design.gif" alt="Singleton Pattern">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-29T08:25:24.000Z">2020-01-29</time></div>
+                    <a href="/2020/01/29/SingleTon_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Singleton Pattern</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Blog/">
+                        <span class="tag">Blog</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Design-Pattern/">
+                        <span class="tag">Design Pattern</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Functional-Programming/">
+                        <span class="tag">Functional Programming</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/coring.gif" alt="Singleton Pattern" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 HoRang&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("kr");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://hanhorang.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
