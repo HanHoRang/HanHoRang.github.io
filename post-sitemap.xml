@@ -7,47 +7,55 @@
     </url>
 
     <url>
-        <loc>https://hanhorang.github.io/2020/03/05/Strategy_Pattern/</loc>
-        <lastmod>2020-03-18T05:01:05.415Z</lastmod>
+        <loc>https://hanhorang.github.io/2020/01/21/Design_Pattern/Observer_Pattern/</loc>
+        <lastmod>2020-03-20T01:56:23.148Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://hanhorang.github.io/2020/01/29/SingleTon_Pattern/</loc>
-        <lastmod>2020-03-18T05:00:42.727Z</lastmod>
+        <loc>https://hanhorang.github.io/2020/03/05/Design_Pattern/Strategy_Pattern/</loc>
+        <lastmod>2020-03-20T01:56:10.696Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://hanhorang.github.io/2020/01/21/Observer_Pattern/</loc>
-        <lastmod>2020-03-18T05:00:36.135Z</lastmod>
+        <loc>https://hanhorang.github.io/2020/02/06/Design_Pattern/Iterator_Pattern/</loc>
+        <lastmod>2020-03-20T01:56:03.248Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://hanhorang.github.io/2020/02/06/Iterator_Pattern/</loc>
-        <lastmod>2020-03-18T05:00:26.831Z</lastmod>
+        <loc>https://hanhorang.github.io/2020/02/01/Design_Pattern/Facade_Pattern/</loc>
+        <lastmod>2020-03-20T01:55:52.928Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://hanhorang.github.io/2020/02/01/Facade_Pattern/</loc>
-        <lastmod>2020-03-18T05:00:18.844Z</lastmod>
+        <loc>https://hanhorang.github.io/2020/03/20/Design_Pattern/Prototype_Pattern/</loc>
+        <lastmod>2020-03-20T01:55:41.131Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://hanhorang.github.io/2020/01/17/%ED%95%A8%EC%88%98%ED%98%95%EC%96%B8%EC%96%B4_%EB%AA%A8%EB%82%98%EB%93%9C_in_%ED%8C%8C%EC%9D%B4%EC%8D%AC_.md/</loc>
+        <loc>https://hanhorang.github.io/2020/01/29/Design_Pattern/SingleTon_Pattern/</loc>
+        <lastmod>2020-03-20T01:55:31.919Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://hanhorang.github.io/2020/01/17/functional/%ED%95%A8%EC%88%98%ED%98%95%EC%96%B8%EC%96%B4_%EB%AA%A8%EB%82%98%EB%93%9C_in_%ED%8C%8C%EC%9D%B4%EC%8D%AC_.md/</loc>
         <lastmod>2020-03-18T04:54:41.623Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -55,7 +63,7 @@
     </url>
 
     <url>
-        <loc>https://hanhorang.github.io/2020/01/05/%ED%95%A8%EC%88%98%ED%98%95%EC%96%B8%EC%96%B4_in_%ED%8C%8C%EC%9D%B4%EC%8D%AC_/</loc>
+        <loc>https://hanhorang.github.io/2020/01/05/functional/%ED%95%A8%EC%88%98%ED%98%95%EC%96%B8%EC%96%B4_in_%ED%8C%8C%EC%9D%B4%EC%8D%AC_/</loc>
         <lastmod>2020-03-18T04:54:06.968Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -63,7 +71,7 @@
     </url>
 
     <url>
-        <loc>https://hanhorang.github.io/2020/02/16/Github_Blog_%EA%B5%AC%EC%B6%95%EA%B8%B0/</loc>
+        <loc>https://hanhorang.github.io/2020/02/16/blog/Github_Blog_%EA%B5%AC%EC%B6%95%EA%B8%B0/</loc>
         <lastmod>2020-03-18T04:52:26.877Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>

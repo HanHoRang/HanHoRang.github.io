@@ -7,23 +7,23 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>깃허브 블로그 구축기 - HoRang Blog</title>
+<title>Prototype Pattern - HoRang Blog</title>
 
 
-    <meta name="description" content="Github Blog 구축 기술 블로그용으로 깃허브을 택하여 구축하는 과정에서 생기는 에러에 대한 해결 방법을 정리하였습니다. 제가 참조하여 따라한 링크는 다음과 같으며, 테스트는 Ubuntu16.04 에서 진행하였습니다. Hexo install 에러 ubuntu16.04 에서 Nodejs Version 의존성 문제로 업데이트 필요, NVM 설치 12345">
-<meta name="keywords" content="Hexo,Blog">
+    <meta name="description" content="프로토타입 디자인 패턴  원형이 되는 인스턴스를 사용하여 생성할 객체의 종류를 명시하고, 이렇게 만든 견본을 복사해서 새로운 객체를 생성합니다.  생성할 객체들의 타입이 프로토타입인 인스턴스로 부터 결정되도록 하며, 인스턴스는 새 객체를 만들기 위해 자신을 복제(clone)하는 패턴이며 객체를 생성(create)하는 고유의 비용이 불가피하게 매우 클 때,">
+<meta name="keywords" content="Design Pattern">
 <meta property="og:type" content="article">
-<meta property="og:title" content="깃허브 블로그 구축기">
-<meta property="og:url" content="https://hanhorang.github.io/2020/02/16/Github_Blog_구축기/index.html">
+<meta property="og:title" content="Prototype Pattern">
+<meta property="og:url" content="https://hanhorang.github.io/2020/03/20/Design_Pattern/Prototype_Pattern/index.html">
 <meta property="og:site_name" content="HoRang Blog">
-<meta property="og:description" content="Github Blog 구축 기술 블로그용으로 깃허브을 택하여 구축하는 과정에서 생기는 에러에 대한 해결 방법을 정리하였습니다. 제가 참조하여 따라한 링크는 다음과 같으며, 테스트는 Ubuntu16.04 에서 진행하였습니다. Hexo install 에러 ubuntu16.04 에서 Nodejs Version 의존성 문제로 업데이트 필요, NVM 설치 12345">
+<meta property="og:description" content="프로토타입 디자인 패턴  원형이 되는 인스턴스를 사용하여 생성할 객체의 종류를 명시하고, 이렇게 만든 견본을 복사해서 새로운 객체를 생성합니다.  생성할 객체들의 타입이 프로토타입인 인스턴스로 부터 결정되도록 하며, 인스턴스는 새 객체를 만들기 위해 자신을 복제(clone)하는 패턴이며 객체를 생성(create)하는 고유의 비용이 불가피하게 매우 클 때,">
 <meta property="og:locale" content="kr">
-<meta property="og:image" content="https://hanhorang.github.io/images/hexo.jpg">
-<meta property="og:updated_time" content="2020-03-18T04:52:26.877Z">
+<meta property="og:image" content="https://hanhorang.github.io/images/design.gif">
+<meta property="og:updated_time" content="2020-03-20T01:55:41.131Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="깃허브 블로그 구축기">
-<meta name="twitter:description" content="Github Blog 구축 기술 블로그용으로 깃허브을 택하여 구축하는 과정에서 생기는 에러에 대한 해결 방법을 정리하였습니다. 제가 참조하여 따라한 링크는 다음과 같으며, 테스트는 Ubuntu16.04 에서 진행하였습니다. Hexo install 에러 ubuntu16.04 에서 Nodejs Version 의존성 문제로 업데이트 필요, NVM 설치 12345">
-<meta name="twitter:image" content="https://hanhorang.github.io/images/hexo.jpg">
+<meta name="twitter:title" content="Prototype Pattern">
+<meta name="twitter:description" content="프로토타입 디자인 패턴  원형이 되는 인스턴스를 사용하여 생성할 객체의 종류를 명시하고, 이렇게 만든 견본을 복사해서 새로운 객체를 생성합니다.  생성할 객체들의 타입이 프로토타입인 인스턴스로 부터 결정되도록 하며, 인스턴스는 새 객체를 만들기 위해 자신을 복제(clone)하는 패턴이며 객체를 생성(create)하는 고유의 비용이 불가피하게 매우 클 때,">
+<meta name="twitter:image" content="https://hanhorang.github.io/images/design.gif">
 
 
 
@@ -81,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/coring.gif" alt="깃허브 블로그 구축기" height="28">
+                <img src="/images/coring.gif" alt="Prototype Pattern" height="28">
             
             </a>
         </div>
@@ -132,7 +132,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="/images/hexo.jpg" alt="깃허브 블로그 구축기">
+            <img class="thumbnail" src="/images/design.gif" alt="Prototype Pattern">
         </span>
     </div>
     
@@ -140,17 +140,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-02-16T07:25:24.000Z">2020-02-16</time>
+                <time class="level-item has-text-grey" datetime="2020-03-19T15:00:00.000Z">2020-03-20</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Tools/">Tools</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Tools/Hexo/">Hexo</a>
+                <a class="has-link-grey -link" href="/categories/develop/">develop</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/develop/Design-Pattern/">Design Pattern</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 minutes lesen (Über 227 Worte)
+                    8 minutes lesen (Über 1241 Worte)
                 </span>
                 
                 
@@ -159,26 +159,194 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                깃허브 블로그 구축기
+                Prototype Pattern
             
         </h1>
         <div class="content">
-            <h1><span id="github-blog-구축">Github Blog 구축</span></h1>
-<p>기술 블로그용으로 깃허브을 택하여 구축하는 과정에서 생기는 에러에 대한 해결 방법을 정리하였습니다.</p>
-<p>제가 참조하여 따라한 링크는 <a href="https://www.holaxprogramming.com/2017/04/16/github-page-and-hexo/">다음</a>과 같으며, 테스트는 Ubuntu16.04 에서 진행하였습니다.</p>
-<p><strong>Hexo install 에러</strong></p>
-<p>ubuntu16.04 에서 Nodejs Version 의존성 문제로 업데이트 필요, NVM 설치</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">export</span> NVM_DIR=<span class="string">"<span class="variable">$HOME</span>/.nvm"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> [ -s <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span> ] &amp;&amp; . <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> nvm install 10.0</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> nvm use 10.0</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo install</span></span><br></pre></td></tr></table></figure>
-<p>**Deployer not found: git  :: hexo deploy **</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
-<p><strong>블로그 업데이트하기</strong></p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo deploy --<span class="keyword">generate</span></span><br></pre></td></tr></table></figure>
-<h2><span id="참고">참고</span></h2>
-<p><a href="https://www.holaxprogramming.com/2017/04/16/github-page-and-hexo/">https://www.holaxprogramming.com/2017/04/16/github-page-and-hexo/</a></p>
-<p><a href="https://simhyejin.github.io/2016/06/24/hexo-themes/">https://simhyejin.github.io/2016/06/24/hexo-themes/</a></p>
-<p><a href="https://cheese10yun.github.io/blog-start/">https://cheese10yun.github.io/blog-start/</a></p>
-<p><a href="https://alleyful.github.io/">hexo 이카루스 블로그 Alley</a></p>
-<p><a href="https://blog.zhangruipeng.me/hexo-theme-icarus/Plugins/Share/sharethis-share-plugin/">hexo 이카루스 가이드라인</a></p>
+            <h2><span id="프로토타입-디자인-패턴">프로토타입 디자인 패턴</span></h2>
+<blockquote>
+<p>원형이 되는 인스턴스를 사용하여 생성할 객체의 종류를 명시하고, 이렇게 만든 견본을 복사해서 새로운 객체를 생성합니다.</p>
+</blockquote>
+<p>생성할 객체들의 타입이 프로토타입인 인스턴스로 부터 결정되도록 하며, 인스턴스는 새 객체를 만들기 위해 자신을 복제(clone)하는 패턴이며 객체를 생성(create)하는 고유의 비용이 불가피하게 매우 클 때, 이 비용을 줄일 수 있습니다. [위키백과]</p>
+<p><strong>구현</strong></p>
+<p>생성된 객체를 복사하여 구현됩니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x, y)</span>:</span></span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">move_point</span><span class="params">(self, x, y)</span>:</span></span><br><span class="line">        self.x += x</span><br><span class="line">        self.y += y</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">display_point</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">f'<span class="subst">&#123;self.x&#125;</span>, <span class="subst">&#123;self.y&#125;</span>'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">clone</span><span class="params">(self)</span>:</span></span><br><span class="line">        obj = deepcopy(self)</span><br><span class="line">        <span class="keyword">return</span> obj</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p1 = Point(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">    p1.display_point()</span><br><span class="line">    p2 = p1.clone()</span><br><span class="line">    p2.move_point(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">    p2.display_point() <span class="comment"># 2 3 </span></span><br><span class="line">    p1.display_point() <span class="comment"># 1 2</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>copy.deepcopy(self), 깊은 복사</code> or <code>copy.copy(self), 얇은 복사</code> 를 통해 객체를 복사하여 구현할 수 있습니다.</li>
+</ul>
+<p>추가로 파이썬의 매직 메소드(<code>__init__</code>, <code>__call__</code>)로 활용하여 객체 생성의 리소스를 절약할 수 있습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Class Handler:</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="comment"># 모델 Load 및 학습</span></span><br><span class="line">        self.model = Predictor()</span><br><span class="line">        self.model.load_weights()</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, req)</span>:</span></span><br><span class="line">        <span class="comment"># req 값 모델 적용 </span></span><br><span class="line">        <span class="keyword">return</span> self.model(req.input)</span><br></pre></td></tr></table></figure>
+<h4><span id="할당-vs-깊은-복사-vs-얇은-복사">할당(=) vs 깊은 복사 vs 얇은 복사</span></h4>
+<p>클래스를 할당하면 되는데 굳이 깊은 복사를 해야하는 이유가 존재합니다. 작동 방식의 차이 때문인데요. 다음과 같은 그림으로 작동 차이를 파악할 수 있습니다.</p>
+<p><img src="https://miro.medium.com/max/1880/1*V22I5caA8NaY1m12DpRnfg.png" alt></p>
+<p>할당과 얇은 복사의 차이점은 객체 생성의 차이이며, 깊은 복사와 얇은 복사의 차이는 값을 가르키는 포인터의 차이입니다!</p>
+<h4><span id="어디에-사용해야-할까요">어디에 사용해야 할까요?</span></h4>
+<p>위의 예제를 보신 것처럼 프로토타입 패턴의 요점은 <code>객체를 생성(create)하는 고유의 비용이 불가피하게 매우 클 때, 이 비용을 줄임</code> 에 있습니다.  고유의 비용이 무엇일까요?</p>
+<p>자세한 활용처를 알기위해  위키 백과에서 소개한 프로토타입의 활용처를  스크립트 해왔습니다.</p>
+<blockquote>
+<p>The Prototype design pattern solves problems like: [<a href="https://en.wikipedia.org/wiki/Prototype_pattern#cite_note-3">3]</a></p>
+<ul>
+<li>How can objects be created so that which objects to create can be specified at run-time?</li>
+</ul>
+<p>런타임에서 생성 객체를 지정하고 싶을 때</p>
+<ul>
+<li>How can dynamically loaded classes be instantiated?</li>
+</ul>
+<p>상태값이 변하는 클래스를 인스턴스화하고 싶을 때</p>
+</blockquote>
+<p><img src="https://media1.giphy.com/media/3o7buirYcmV5nSwIRW/giphy.webp?cid=790b76116022ba64967abc5a153dec4ebb1b2a7c27bc5ea4&amp;rid=giphy.webp" alt></p>
+<center> 이해는 했는데 어떤 상황에 적절할까요??  </center>
+조심스럽게 예상해봅니다만.. 데이터 전처리 과정에서 복사를 통해 고유의 비용을 줄였던 기억이 있습니다. 결론부터 말씀드리면 고유의 비용은 `시간` 이라고 볼 수 있습니다. 약 2.5GB 용량의 CSV 데이터를 데이터프레임으로 불러올때 2분의 시간이 소비되었지만,  데이터프레임을 복사하는 것에는 바로 된 것을 보아 **런타임에서 무엇의 작용**을 통해 고유의 비용이 줄지 않았나 생각됩니다.
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">search = pd.read_csv(<span class="string">'Search.csv'</span>)</span><br><span class="line">search.head()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right"></th>
+<th style="text-align:right">CLNT_ID</th>
+<th style="text-align:right">SESS_ID</th>
+<th style="text-align:right">KWD_NM</th>
+<th style="text-align:right">SEARCH_CNT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">5607714</td>
+<td style="text-align:right">7112876</td>
+<td style="text-align:right">빌리프 아이크림</td>
+<td style="text-align:right">6</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">5607714</td>
+<td style="text-align:right">4090791</td>
+<td style="text-align:right">프리메라 마스크팩</td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">5607714</td>
+<td style="text-align:right">4090791</td>
+<td style="text-align:right">여성청결제</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">5612428</td>
+<td style="text-align:right">1876482</td>
+<td style="text-align:right">명품가방</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:right">5612428</td>
+<td style="text-align:right">658123</td>
+<td style="text-align:right">콩순이 아이스크림</td>
+<td style="text-align:right">1</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">search2 = search.copy() </span><br><span class="line">search = search.drop(<span class="string">"CLNT_ID"</span>, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">search.head()</span><br><span class="line">search2.head()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right"></th>
+<th style="text-align:right">SESS_ID</th>
+<th style="text-align:right">KWD_NM</th>
+<th style="text-align:right">SEARCH_CNT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">7112876</td>
+<td style="text-align:right">빌리프 아이크림</td>
+<td style="text-align:right">6</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">4090791</td>
+<td style="text-align:right">프리메라 마스크팩</td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">4090791</td>
+<td style="text-align:right">여성청결제</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">1876482</td>
+<td style="text-align:right">명품가방</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:right">658123</td>
+<td style="text-align:right">콩순이 아이스크림</td>
+<td style="text-align:right">1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:right"></th>
+<th style="text-align:right">CLNT_ID</th>
+<th style="text-align:right">SESS_ID</th>
+<th style="text-align:right">KWD_NM</th>
+<th style="text-align:right">SEARCH_CNT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">5607714</td>
+<td style="text-align:right">7112876</td>
+<td style="text-align:right">빌리프 아이크림</td>
+<td style="text-align:right">6</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">5607714</td>
+<td style="text-align:right">4090791</td>
+<td style="text-align:right">프리메라 마스크팩</td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">5607714</td>
+<td style="text-align:right">4090791</td>
+<td style="text-align:right">여성청결제</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">5612428</td>
+<td style="text-align:right">1876482</td>
+<td style="text-align:right">명품가방</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:right">5612428</td>
+<td style="text-align:right">658123</td>
+<td style="text-align:right">콩순이 아이스크림</td>
+<td style="text-align:right">1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Pandas 에서 제공하는 COPY() 연산으로 deepcopy가 됩니다.</li>
+<li>#1 시점에서 데이터를 로드하는 시간이 소요되지 반면,   <code>=</code>  연산으로 객체를 복사하는 경우 시간 소비가 상대적으로 적은 것을 체감할 수 있습니다.</li>
+</ul>
+<h4><span id="결론">결론</span></h4>
+<p>프로토타입 패턴을 사용하는 상황으로 큰 데이터를 로드할 때 사용하기 적합합니다.  비용적 측면에서는 시간 자원을 크게 아낄 수 있음으로 개발성을 높일 수 있어 효율적이라 판단됩니다.</p>
+<h3><span id="참고">참고</span></h3>
+<p><a href="https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85_%ED%8C%A8%ED%84%B4">프로토타입 위키백과</a></p>
+<p><a href="https://github.com/hwkim94/competitions/tree/master/BIgContest2018">데이터 전처리 깃허브</a></p>
+<p><a href="https://medium.com/@thawsitt/assignment-vs-shallow-copy-vs-deep-copy-in-python-f70c2f0ebd86">할당 vs 얇은 복사 vs 깊은 복사</a></p>
 
         </div>
         
@@ -186,7 +354,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Blog/">Blog</a>, <a class="has-link-grey -link" href="/tags/Hexo/">Hexo</a>
+                    <a class="has-link-grey -link" href="/tags/Design-Pattern/">Design Pattern</a>
                 </div>
             </div>
         </div>
@@ -203,17 +371,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/03/05/Strategy_Pattern/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Strategy Pattern</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/02/06/Iterator_Pattern/">
-                <span class="level-item">Iterator Pattern</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/03/05/Design_Pattern/Strategy_Pattern/">
+                <span class="level-item">Strategy Pattern</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -263,7 +424,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            8
+                            9
                         </p>
                     </a>
                 </div>
@@ -388,7 +549,7 @@
                 <span class="level-item">develop</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/develop/Design-Pattern/">
@@ -396,7 +557,7 @@
                 <span class="level-item">Design Pattern</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li></ul></li>
             </ul>
@@ -421,16 +582,16 @@
         
         <article class="media">
             
-            <a href="/2020/03/05/Strategy_Pattern/" class="media-left">
+            <a href="/2020/03/20/Design_Pattern/Prototype_Pattern/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/design.gif" alt="Strategy Pattern">
+                    <img class="thumbnail" src="/images/design.gif" alt="Prototype Pattern">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-05T08:25:24.000Z">2020-03-05</time></div>
-                    <a href="/2020/03/05/Strategy_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Strategy Pattern</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-19T15:00:00.000Z">2020-03-20</time></div>
+                    <a href="/2020/03/20/Design_Pattern/Prototype_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Prototype Pattern</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/develop/">develop</a> / <a class="has-link-grey -link" href="/categories/develop/Design-Pattern/">Design Pattern</a>
                     </p>
@@ -440,7 +601,26 @@
         
         <article class="media">
             
-            <a href="/2020/02/16/Github_Blog_구축기/" class="media-left">
+            <a href="/2020/03/05/Design_Pattern/Strategy_Pattern/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/design.gif" alt="Strategy Pattern">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-05T08:25:24.000Z">2020-03-05</time></div>
+                    <a href="/2020/03/05/Design_Pattern/Strategy_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Strategy Pattern</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/develop/">develop</a> / <a class="has-link-grey -link" href="/categories/develop/Design-Pattern/">Design Pattern</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/02/16/blog/Github_Blog_구축기/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/hexo.jpg" alt="깃허브 블로그 구축기">
                 </p>
@@ -449,7 +629,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-16T07:25:24.000Z">2020-02-16</time></div>
-                    <a href="/2020/02/16/Github_Blog_구축기/" class="title has-link-black-ter is-size-6 has-text-weight-normal">깃허브 블로그 구축기</a>
+                    <a href="/2020/02/16/blog/Github_Blog_구축기/" class="title has-link-black-ter is-size-6 has-text-weight-normal">깃허브 블로그 구축기</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Tools/">Tools</a> / <a class="has-link-grey -link" href="/categories/Tools/Hexo/">Hexo</a>
                     </p>
@@ -459,7 +639,7 @@
         
         <article class="media">
             
-            <a href="/2020/02/06/Iterator_Pattern/" class="media-left">
+            <a href="/2020/02/06/Design_Pattern/Iterator_Pattern/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/design.gif" alt="Iterator Pattern">
                 </p>
@@ -468,7 +648,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-06T08:25:24.000Z">2020-02-06</time></div>
-                    <a href="/2020/02/06/Iterator_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Iterator Pattern</a>
+                    <a href="/2020/02/06/Design_Pattern/Iterator_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Iterator Pattern</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/develop/">develop</a> / <a class="has-link-grey -link" href="/categories/develop/Design-Pattern/">Design Pattern</a>
                     </p>
@@ -478,7 +658,7 @@
         
         <article class="media">
             
-            <a href="/2020/02/01/Facade_Pattern/" class="media-left">
+            <a href="/2020/02/01/Design_Pattern/Facade_Pattern/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/design.gif" alt="Facade Pattern">
                 </p>
@@ -487,26 +667,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-01T08:25:24.000Z">2020-02-01</time></div>
-                    <a href="/2020/02/01/Facade_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Facade Pattern</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/develop/">develop</a> / <a class="has-link-grey -link" href="/categories/develop/Design-Pattern/">Design Pattern</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/01/29/SingleTon_Pattern/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/design.gif" alt="Singleton Pattern">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-29T08:25:24.000Z">2020-01-29</time></div>
-                    <a href="/2020/01/29/SingleTon_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Singleton Pattern</a>
+                    <a href="/2020/02/01/Design_Pattern/Facade_Pattern/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Facade Pattern</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/develop/">develop</a> / <a class="has-link-grey -link" href="/categories/develop/Design-Pattern/">Design Pattern</a>
                     </p>
@@ -531,7 +692,7 @@
                     <span class="level-item">March 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -581,7 +742,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Design-Pattern/">
                         <span class="tag">Design Pattern</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -623,7 +784,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/coring.gif" alt="깃허브 블로그 구축기" height="28">
+                    <img src="/images/coring.gif" alt="Prototype Pattern" height="28">
                 
                 </a>
                 <p class="is-size-7">
