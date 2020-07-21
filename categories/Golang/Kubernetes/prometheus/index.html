@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Kategorie: prometheus - HoRang Blog</title>
+<title>Category: prometheus - HoRang Blog</title>
 
 
     <meta property="og:type" content="website">
@@ -110,7 +110,7 @@
                 
                 
                 
-                <a class="navbar-item search" title="Suche" href="javascript:;">
+                <a class="navbar-item search" title="Search" href="javascript:;">
                     <i class="fas fa-search"></i>
                 </a>
                 
@@ -126,7 +126,7 @@
     <div class="card-content">
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
-            <li><a href="/categories">Kategorien</a></li>
+            <li><a href="/categories">Categories</a></li>
             
             <li><a href="/categories/Golang/Kubernetes/">Kubernetes</a></li>
             
@@ -161,7 +161,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    14 minutes lesen (Über 2091 Worte)
+                    14 minutes read (About 2091 words)
                 </span>
                 
                 
@@ -176,44 +176,56 @@
         <div class="content">
             <h2><span id="serverless-computing">Serverless Computing</span></h2>
 <p>서버리스 컴퓨팅(Serverless Computing)는 <strong>IT 인프라 관리</strong> 없이 모든 <strong>기능적 요구사항</strong>에 대해 함수를 호출하여 처리하는 클라우드 컴퓨팅 패러다임입니다. 사용자는 필요한 비즈니스 로직만 함수로 개발하면 됩니다.</p>
-<p><strong>IT 인프라란?</strong></p>
-<p>애플리케이션을 가동시키기 위해 필요한 하드웨어나 OS, 미들웨어, 네트워크 등 시스템의 기반을 말합니다.</p>
-<p><strong>시스템 요구사항 두가지</strong></p>
+<br>
+**IT 인프라란?**
+<p>애플리케이션을 가동시키기 위해 필요한 하드웨어나 OS, 미들웨어, 네트워크 등 시스템의 기반을 말합니다.<br>
+<br><br>
+<strong>시스템 요구사항 두가지</strong></p>
 <p>기능적 요구사항 : 어떤 기능을 하는지, 무엇을 할 수 있는지</p>
 <p>비기능적 요구사항 : 시스템의 성능, 안전성, 확장성, 보안 등</p>
+<p><br><br></p>
 <p><strong>서버리스 함수 예 (Python)</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Handler</span><span class="params">(req)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> req.input</span><br></pre></td></tr></table></figure>
+<br>
 <p><strong>서버리스 추세</strong></p>
 <p><img src="https://blogs.gartner.com/smarterwithgartner/files/2018/12/PR_051_544334_Costello_Top_10_Technology_Trends_Impacting_Infrastructure__Operations_for_2019_Article_graphic_v5-684x1024.png" alt="img"></p>
 <p>2019년 가트너(Gartner)가 발표한 인프라 조직에 가장 영향을 미칠 상위 10개의 기술 중, 서버리스 컴퓨팅이 1위 트랜드 기술로 선정되었습니다.</p>
+<p><br><br><br><br></p>
 <h3><span id="why">Why?</span></h3>
 <p>서버리스만의 차별성은 <strong>빠른 개발성</strong>, <strong>유연한 확장성</strong> 과  <strong>저렴한 운영 비용</strong>입니다.</p>
-<h4><span id="빠른-개발성"><strong>빠른 개발성</strong></span></h4>
+<br>
+#### **빠른 개발성**
 <p>앞서 소개해드린 서버리스 함수 예처럼 개발자는 필요한 비즈니스 기능만 집중하여 개발할 수 있으며 <strong>빠른 개발성</strong>을 보장합니다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Handler</span><span class="params">(req)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> req.input</span><br></pre></td></tr></table></figure>
+<br>
 <h4><span id="유연한-확장성"><strong>유연한 확장성</strong></span></h4>
 <p>서버리스 플랫폼에서는 사용자가 필요로 하는 시간동안만 서버가 운용되며 그 시간만큼만 비용이 청구됩니다. 또한 특정 조건을 설정하지 않아도 급격한 트래픽 변화에 유연한 대응이 가능합니다.  이는 서버리스의 기반 기술인 쿠버네티스가 제공하는 기능으로 오토스케일링을 통해 쉽게 구현이 가능합니다.</p>
 <h5><span id="autoscaling">AutoScaling ?</span></h5>
 <p>먼저 Scaling이란 서비스 요청이 늘어나면 이를 수용하기 위해 서버의 수를 늘려 연산 능력(capacity)을 향상시키고 반대로 서비스 요청이 줄게 되면 불필요한 서버의 수를 줄이는 action을 말합니다.  Auto Scaling는 문자 그대로 이러한 scaling acation이 자동으로 이루어지는 서비스를 말합니다. 아래의 그림처럼 시간에 따라 서비스 요청(붉은 실선)이 늘거나 줄어드는 상황에 맞게 자동으로 서버의 수를 조절하며 <strong>운영 비용을 줄이며 급격한 트래픽 변화에 유연한 대응이 가능합니다.</strong>  현재 오토스케일링은 서버리스의 기반 기술인 쿠버네티스에서 제공하는 기능으로 설정 값 기입을 통해 자동으로 조절이 가능합니다.</p>
 <p><img src="https://docs.ncloud.com/ko/assets/compute-10-3-104.png" alt></p>
-<h4><span id="저렴한-운영-비용">저렴한 운영 비용</span></h4>
-<p>서버리스에서는 더 저렴한 운영 비용을 제공할 수 있습니다.  서버의 수를 0까지 스케일할 수 있는 <strong>AutoScaling to Zero</strong> 기능을 제공하기 때문입니다.</p>
-<h5><span id="autoscaling-to-zero">AutoScaling to Zero</span></h5>
+<h4><span id="저렴한-운영-비용"><strong>저렴한 운영 비용</strong></span></h4>
+<p>서버리스에서는 더 저렴한 운영 비용을 제공할 수 있습니다.  서버의 수를 0까지 스케일할 수 있는 AutoScaling to Zero 기능을 제공하기 때문입니다.</p>
+<br> 
+##### AutoScaling to Zero 
 <p>오토스케일일의 확장 개념으로 스케일할 개수의 수를 0까지 조절할 수 있는 기능입니다.  현재 쿠버네티스에서의 오토스케일링 기능은 1~N 까지의 설정값을 제공하며 <strong>0까지의 Scale Down에 대해서는 별도의 개발이 필요합니다</strong>.</p>
+<p><br><br></p>
 <h4><span id="how">HOW?</span></h4>
 <ul>
 <li>쿠버네티스 컨트롤러, ReplicaSet</li>
 <li>모니터링 도구, 프로메테우스</li>
 </ul>
-<p><strong>쿠버네티스 ReplicaSet</strong></p>
+<br>
+**쿠버네티스 ReplicaSet**
 <p>쿠버네티스는 프로세스를 격리시키는 가상화 기술인 도커 컨테이너의 오케스트레이션 도구입니다. 쿠버네티스는 컨테이너화된 워크로드와 서비스를 관리하기 위한 기능을 제공하며, 확장 가능한 오픈소스 플랫폼으로, 선언적 구성과 자동화를 모두 지원합니다. 현재 대부분의 서버리스 플랫폼들은 쿠버네티스를 바탕으로 설계되었습니다.</p>
 <p>ReplicaSet은 쿠버네티스의 기본적인 Pod 를 관리하는 컨트롤러로 지정된 숫자로 Pod를 기동시키고, 관리하는 역할을 수행합니다. 여기서 Pod란 가장 기본적인 배포 단위로, 컨테이너를 포함하는 단위입니다.</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ReplicaSet</span> <span class="comment"># 레플리카셋 </span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">frontend</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">guestbook</span></span><br><span class="line">    <span class="attr">tier:</span> <span class="string">frontend</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="comment"># 케이스에 따라 레플리카를 수정한다.</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">3</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">tier:</span> <span class="string">frontend</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">tier:</span> <span class="string">frontend</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">php-redis</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">gcr.io/google_samples/gb-frontend:v3</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pods</span><br><span class="line"> </span><br><span class="line"> NAME             READY   STATUS    RESTARTS   AGE</span><br><span class="line">frontend-b2zdv   <span class="number">1</span>/<span class="number">1</span>     Running   <span class="number">0</span>          <span class="number">6</span>m36s</span><br><span class="line">frontend-vcmts   <span class="number">1</span>/<span class="number">1</span>     Running   <span class="number">0</span>          <span class="number">6</span>m36s</span><br><span class="line">frontend-wtsmm   <span class="number">1</span>/<span class="number">1</span>     Running   <span class="number">0</span>          <span class="number">6</span>m36s</span><br></pre></td></tr></table></figure>
+<p><br><br></p>
 <h5><span id="프로메테우스">프로메테우스</span></h5>
 <p>Prometheus는 오픈소스 시스템 모니터링 도구입니다.  구조가 간단해서 운영이 쉽고, 강력한 쿼리 기능을 가지고 있으며, 그라파나(Grafana) 를 통한 시각화를 지원합니다. 무엇보다 넓은 오픈 소스 생태계를 기반으로 해서, 많은 시스템을 모니터링할 수 있는 다양한 플러그인을 가지고 있는 것이 가장 큰 장점을 가지고 있습니다.</p>
 <p>프로메테우스의 데이터 수집방식으로는 Pull 방식을 사용하여, 프로메테우스 서버에 클라이언트를 등록하면 프로메테우스가 주기적으로 클라이언트에 접속해서 데이터를 가져오는 방식을 취합니다.</p>
 <p><img src="https://miro.medium.com/max/770/1*tHxrGpEUte5iz8IVKAhyfQ.png" alt></p>
+<p><br><br><br></p>
 <h3><span id="autoscaling-to-zero-원리">AutoScaling to Zero 원리</span></h3>
 <blockquote>
 <p>사용자가 호출하지 않은 함수들을 찾아 파드 수를 0으로 조절하면 끝</p>
@@ -221,15 +233,18 @@
 <p>프로메테우스는 PromQL이라는 쿼리 언어를 통해 사용자가 원하는 메트릭 값을 얻을 수 있습니다.</p>
 <p>아래의 쿼리문은 서버리스의 모든 함수를 대상으로 N분간 호출 횟수 변동량을 얻습니다.</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">rate</span><span class="params">(gateway_function_invocation_total[Nm])</span></span></span><br></pre></td></tr></table></figure>
-<p><img src="20200714_153614.png" alt="20200714_153614"></p>
-<p>위의 쿼리 결과값에서 Value가 0 인 것은 5분동안 함수 호출이 0인 것을 뜻합니다.</p>
-<p>0인 함수를 대상으로 쿠버네티스 Replica Set을 0으로 조정할 수 있습니다.</p>
+<p><img src="./20200714_153614.png" alt="20200714_153614"></p>
+<br>
+위의 쿼리 결과값에서 Value가 0 인 것은 5분동안 함수 호출이 0인 것을 뜻합니다. 
+<p>0인 함수를 대상으로 쿠버네티스 Replica Set을 0으로 조정할 수 있습니다.<br>
+<br></p>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl scale <span class="keyword">deploy</span> <span class="keyword">echo</span> <span class="params">--replicas=0</span> -n openfx-fn</span><br></pre></td></tr></table></figure>
 <figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get rs -n openfx-fn</span><br><span class="line">NAME               DESIRED   CURRENT   READY   AGE</span><br><span class="line">echo-dcf65bb86     <span class="number">0</span>         <span class="number">0</span>         <span class="number">0</span>       <span class="number">46</span>d</span><br><span class="line">echo2<span class="number">-59</span>d9f474bb   <span class="number">1</span>         <span class="number">1</span>         <span class="number">1</span>       <span class="number">46</span>d</span><br><span class="line">echo3<span class="number">-6</span>bc7f58976   <span class="number">1</span>         <span class="number">1</span>         <span class="number">1</span>       <span class="number">46</span>d</span><br><span class="line">echo4<span class="number">-7</span>b6dd65d6b   <span class="number">1</span>         <span class="number">1</span>         <span class="number">1</span>       <span class="number">46</span>d</span><br><span class="line">echo5<span class="number">-7754</span>d4fd44   <span class="number">1</span>         <span class="number">1</span>         <span class="number">1</span>       <span class="number">46</span>d</span><br></pre></td></tr></table></figure>
 <p>쿠버네티스가 제공하는 리소스 확인 명령어를 통해 오토스케일링된 함수의 리소스를 확인할 수 있습니다.</p>
 <p>Replicaset이 1일 경우 리소스 사용량</p>
 <figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl top pods -n dcf-function</span><br><span class="line">NAME                                            CPU(cores)   MEMORY(bytes)   </span><br><span class="line">echo<span class="number">-7</span>fb466b4f<span class="number">-6</span>cdcd                            <span class="number">14</span>m          <span class="number">22</span>Mi</span><br></pre></td></tr></table></figure>
-<p>Replicaset이 0일 경우 리소스 사용량</p>
+<br>
+Replicaset이 0일 경우 리소스 사용량
 <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl top pods -n dcf-<span class="function"><span class="keyword">function</span></span></span><br><span class="line"><span class="function"><span class="title">NAME</span>                                            <span class="title">CPU</span><span class="params">(cores)</span>   <span class="title">MEMORY</span><span class="params">(bytes)</span></span></span><br></pre></td></tr></table></figure>
 <p>리소스 사용량이 없으므로 목록에 해당 함수가 없는 것을 확인할 수 있습니다.</p>
 <h3><span id="real-world">Real World</span></h3>
@@ -238,9 +253,9 @@
 <p>Openfaas 는 Faas-idler이라는 오브젝트를 통해 오토스케일링 제로를 제공합니다. 아키텍처와 처리 코드는 다음과 같습니다.</p>
 <p><img src="https://github.com/openfaas-incubator/faas-idler/raw/master/docs/faas-idler.png" alt></p>
 <p>​											프로메테우스의 쿼리와 Faas-nets 내부의 쿠버네티스 replicaset을 이용함</p>
-<p><img src="%EC%BD%94%EB%93%9C1.png" alt="코드1"></p>
+<p><img src="./%EC%BD%94%EB%93%9C1.png" alt="코드1"></p>
 <p>​</p>
-<p><img src="%EC%BD%94%EB%93%9C2.png" alt="코드2"></p>
+<p><img src="./%EC%BD%94%EB%93%9C2.png" alt="코드2"></p>
 <h3><span id="question">Question</span></h3>
 <p>쿠버네티스에서 오토스케일링 수를 0까지 제공하지 않는가?</p>
 <h3><span id="참고">참고</span></h3>
@@ -314,7 +329,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Kategorien
+                        Categories
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
@@ -339,7 +354,7 @@
         
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/HanHoRang" target="_blank" rel="noopener">
-                Folgen</a>
+                Follow</a>
         </div>
         
         
@@ -390,7 +405,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Kategorien
+                Categories
             </h3>
             <ul class="menu-list">
             <li>
@@ -475,7 +490,7 @@
         <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Letzte Einträge
+            Recent
         </h3>
         
         <article class="media">
@@ -580,7 +595,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archive
+            Archives
         </h3>
         <ul class="menu-list">
         
@@ -844,7 +859,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
-<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
+<a id="back-to-top" title="Back to Top" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -868,7 +883,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Tippen Sie etwas..." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -881,10 +896,10 @@ document.addEventListener('DOMContentLoaded', function () {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
                 POSTS: 'Posts',
-                PAGES: 'Seiten',
-                CATEGORIES: 'Kategorien',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
                 TAGS: 'Tags',
-                UNTITLED: '(Unbenannt)',
+                UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',
         };
